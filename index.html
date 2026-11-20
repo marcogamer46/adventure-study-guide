@@ -6,234 +6,472 @@
 <title>Adventure Study Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700&family=Playfair+Display:wght@500;600;640;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-/* ============ design tokens ============ */
+/* ==========================================================================
+   VELVET EXPEDITION — field-atlas study guide
+   + borrowings approved by the design jury:
+     - giant editorial numerals for stats & section numbers (Crisp Studio)
+     - hand-drawn marker-underline on emphasized terms (Grounded Craft)
+     - corner-bracket framing on focus blocks (NEON/SYS)
+     - mono-forward eyebrow labels (kicker)
+   ========================================================================== */
 :root{
-  --bg:#F6F8F9; --bg2:#ECF1F3; --fg:#141E27; --fg2:#586975;
-  --card:#FFFFFF; --line:#DFE7EB;
-  --accent:#0B8A6F; --accent2:#06604D; --accent-ink:#E9F8F3;
-  --amber:#B26A12; --amber-ink:#FBF1E2;
-  --red:#BC4238; --red-ink:#FAECEA;
-  --blue:#2E5FA3; --blue-ink:#EAF0F9;
-  --code-bg:#101820; --code-fg:#D8E3EA;
-  --shadow:0 1px 2px rgba(20,30,39,.05),0 12px 28px rgba(20,30,39,.06);
-  --ring:0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
   color-scheme:light;
+  --bg:#f6f1e7; --bg2:#efe7d7; --card:#fffdf8;
+  --fg:#1b2333; --fg2:#59637c; --line:#dcd2bf;
+  --accent:#b5792e; --accent2:#8e5c22; --accent-ink:#fffaf0;
+  --amber:#e2a239; --amber-ink:#3a2a08;
+  --red:#c1432b; --red-ink:#fff5f0;
+  --blue:#265f8a; --blue-ink:#eff6fb;
+  --violet:#6d4f96; --violet-ink:#f6f1fb;
+  --code-bg:#ece6d8; --code-fg:#25304a;
+  --shadow:0 14px 44px rgba(32,29,20,.14);
+  --ring:#b5792e; --radii:16px;
+  --contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='300' viewBox='0 0 260 300'%3E%3Cg fill='none' stroke='%23b5792e' stroke-width='1.1' opacity='0.14'%3E%3Cellipse cx='150' cy='135' rx='112' ry='96'/%3E%3Cellipse cx='150' cy='135' rx='86' ry='72' transform='rotate(-6 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='61' ry='50' transform='rotate(5 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='37' ry='30' transform='rotate(-10 150 135)'/%3E%3Ccircle cx='150' cy='135' r='14'/%3E%3Cellipse cx='60' cy='225' rx='34' ry='26' transform='rotate(14 60 225)'/%3E%3Cellipse cx='214' cy='52' rx='28' ry='21' transform='rotate(-12 214 52)'/%3E%3C/g%3E%3C/svg%3E");
 }
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0D1418; --bg2:#141D22; --fg:#E5EDF1; --fg2:#8FA3AD;
-    --card:#121B20; --line:#25333A;
-    --accent:#36C8A2; --accent2:#6CDCB9; --accent-ink:#0E241D;
-    --amber:#E7AC54; --amber-ink:#33230E;
-    --red:#E07B6F; --red-ink:#351915;
-    --blue:#80A5DD; --blue-ink:#17233A;
-    --code-bg:#0B1217; --code-fg:#D4E1E8;
-    --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.5);
-    --ring:0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
     color-scheme:dark;
+    --bg:#0d1220; --bg2:#121828; --card:#171f31;
+    --fg:#ebe9df; --fg2:#9ba4ba; --line:#28324c;
+    --accent:#d99a3d; --accent2:#e9b45c; --accent-ink:#181106;
+    --amber:#edbe66; --amber-ink:#2a1e05;
+    --red:#e0634b; --red-ink:#2a120c;
+    --blue:#70a4d0; --blue-ink:#0d1c29;
+    --violet:#b89bd9; --violet-ink:#1e1431;
+    --code-bg:#101625; --code-fg:#e0e4ee;
+    --shadow:0 18px 52px rgba(0,0,0,.5); --ring:#e9b45c;
+    --contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='300' viewBox='0 0 260 300'%3E%3Cg fill='none' stroke='%23d99a3d' stroke-width='1.1' opacity='0.22'%3E%3Cellipse cx='150' cy='135' rx='112' ry='96'/%3E%3Cellipse cx='150' cy='135' rx='86' ry='72' transform='rotate(-6 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='61' ry='50' transform='rotate(5 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='37' ry='30' transform='rotate(-10 150 135)'/%3E%3Ccircle cx='150' cy='135' r='14'/%3E%3Cellipse cx='60' cy='225' rx='34' ry='26' transform='rotate(14 60 225)'/%3E%3Cellipse cx='214' cy='52' rx='28' ry='21' transform='rotate(-12 214 52)'/%3E%3C/g%3E%3C/svg%3E");
   }
 }
 :root[data-theme="dark"]{
-  --bg:#0D1418; --bg2:#141D22; --fg:#E5EDF1; --fg2:#8FA3AD;
-  --card:#121B20; --line:#25333A;
-  --accent:#36C8A2; --accent2:#6CDCB9; --accent-ink:#0E241D;
-  --amber:#E7AC54; --amber-ink:#33230E;
-  --red:#E07B6F; --red-ink:#351915;
-  --blue:#80A5DD; --blue-ink:#17233A;
-  --code-bg:#0B1217; --code-fg:#D4E1E8;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 14px 34px rgba(0,0,0,.5);
-  --ring:0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent);
   color-scheme:dark;
+  --bg:#0d1220; --bg2:#121828; --card:#171f31;
+  --fg:#ebe9df; --fg2:#9ba4ba; --line:#28324c;
+  --accent:#d99a3d; --accent2:#e9b45c; --accent-ink:#181106;
+  --amber:#edbe66; --amber-ink:#2a1e05;
+  --red:#e0634b; --red-ink:#2a120c;
+  --blue:#70a4d0; --blue-ink:#0d1c29;
+  --violet:#b89bd9; --violet-ink:#1e1431;
+  --code-bg:#101625; --code-fg:#e0e4ee;
+  --shadow:0 18px 52px rgba(0,0,0,.5); --ring:#e9b45c;
+  --contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='300' viewBox='0 0 260 300'%3E%3Cg fill='none' stroke='%23d99a3d' stroke-width='1.1' opacity='0.22'%3E%3Cellipse cx='150' cy='135' rx='112' ry='96'/%3E%3Cellipse cx='150' cy='135' rx='86' ry='72' transform='rotate(-6 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='61' ry='50' transform='rotate(5 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='37' ry='30' transform='rotate(-10 150 135)'/%3E%3Ccircle cx='150' cy='135' r='14'/%3E%3Cellipse cx='60' cy='225' rx='34' ry='26' transform='rotate(14 60 225)'/%3E%3Cellipse cx='214' cy='52' rx='28' ry='21' transform='rotate(-12 214 52)'/%3E%3C/g%3E%3C/svg%3E");
 }
-*{box-sizing:border-box}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f6f1e7; --bg2:#efe7d7; --card:#fffdf8;
+  --fg:#1b2333; --fg2:#59637c; --line:#dcd2bf;
+  --accent:#b5792e; --accent2:#8e5c22; --accent-ink:#fffaf0;
+  --amber:#e2a239; --amber-ink:#3a2a08;
+  --red:#c1432b; --red-ink:#fff5f0;
+  --blue:#265f8a; --blue-ink:#eff6fb;
+  --violet:#6d4f96; --violet-ink:#f6f1fb;
+  --code-bg:#ece6d8; --code-fg:#25304a;
+  --shadow:0 14px 44px rgba(32,29,20,.14); --ring:#b5792e;
+  --contour:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='300' viewBox='0 0 260 300'%3E%3Cg fill='none' stroke='%23b5792e' stroke-width='1.1' opacity='0.14'%3E%3Cellipse cx='150' cy='135' rx='112' ry='96'/%3E%3Cellipse cx='150' cy='135' rx='86' ry='72' transform='rotate(-6 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='61' ry='50' transform='rotate(5 150 135)'/%3E%3Cellipse cx='150' cy='135' rx='37' ry='30' transform='rotate(-10 150 135)'/%3E%3Ccircle cx='150' cy='135' r='14'/%3E%3Cellipse cx='60' cy='225' rx='34' ry='26' transform='rotate(14 60 225)'/%3E%3Cellipse cx='214' cy='52' rx='28' ry='21' transform='rotate(-12 214 52)'/%3E%3C/g%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0; background:var(--bg); color:var(--fg); font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; font-size:16px; line-height:1.68; -webkit-font-smoothing:antialiased}
-::selection{background:var(--accent); color:#fff}
-:focus-visible{outline:none; box-shadow:var(--ring); border-radius:6px}
-a{color:var(--accent2); text-decoration:none; font-weight:500}
-a:hover{text-decoration:underline; text-underline-offset:3px}
-h1,h2,h3,h4{font-family:"Space Grotesk",ui-sans-serif,system-ui,sans-serif; line-height:1.15; text-wrap:balance; margin:0; letter-spacing:-.01em}
-p{margin:.55em 0; max-width:68ch}
-ul,ol{margin:.4em 0 .4em 1.25em; padding:0}
-li{margin:.3em 0}
-code,.mono{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.88em}
-:not(pre)>code{background:var(--bg2); color:var(--fg); border:1px solid var(--line); padding:.06em .4em; border-radius:6px; font-weight:500}
-em.hl{font-style:normal; color:var(--accent2); font-weight:600}
-.term{font-weight:600; color:var(--fg)}
-
-/* reading progress */
-.progress{position:fixed; top:0; left:0; height:3px; z-index:60; background:linear-gradient(90deg,var(--accent),var(--blue)); width:0; transition:width .1s linear}
-
-/* layout */
-.wrap{max-width:1180px; margin:0 auto; padding-left:max(20px, env(safe-area-inset-left,0px)); padding-right:max(20px, env(safe-area-inset-right,0px))}
-.layout{display:grid; grid-template-columns:250px minmax(0,1fr); gap:48px; padding-block:32px 100px}
-main{min-width:0}
-@media (max-width:880px){ .layout{grid-template-columns:1fr; gap:6px} }
-
-/* top bar */
-.topbar{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter:blur(12px) saturate(140%); border-bottom:1px solid var(--line)}
-.topbar .wrap{display:flex; align-items:center; gap:16px; height:60px}
-.brand{display:flex; align-items:center; gap:11px; font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:17px; letter-spacing:-.01em}
-.brand .mark{width:28px; height:28px; border-radius:9px; background:linear-gradient(135deg,var(--accent),var(--blue)); color:#fff; display:grid; place-items:center; font-family:"JetBrains Mono",monospace; font-size:14px; font-weight:700; box-shadow:var(--shadow)}
-.spacer{flex:1}
-.theme-btn{background:var(--card); color:var(--fg); border:1px solid var(--line); border-radius:10px; padding:7px 14px; font:inherit; font-size:13.5px; cursor:pointer; display:inline-flex; gap:8px; align-items:center; box-shadow:0 1px 2px rgba(0,0,0,.03)}
-.theme-btn:hover{border-color:var(--accent)}
-.menu-btn{display:none; background:var(--card); border:1px solid var(--line); border-radius:10px; color:var(--fg); padding:7px 11px; cursor:pointer; font:inherit}
-@media (max-width:880px){ .menu-btn{display:inline-block} }
-
-/* side nav */
-nav.sidenav{position:sticky; top:76px; align-self:start; max-height:calc(100vh - 92px); overflow:auto; font-size:14px; padding-right:4px}
-nav.sidenav ul{list-style:none; margin:0}
-nav.sidenav>ul{border-left:1px solid var(--line)}
-nav.sidenav a{display:block; padding:6px 14px; color:var(--fg2); border-left:3px solid transparent; margin-left:-1px; border-radius:0 8px 8px 0; transition:color .12s, background .12s}
-nav.sidenav a:hover{color:var(--fg); text-decoration:none}
-nav.sidenav a.active{color:var(--accent2); border-left-color:var(--accent); font-weight:600; background:color-mix(in srgb, var(--accent) 8%, transparent)}
-nav.sidenav .sub{padding-left:14px}
-nav.sidenav .sub a{font-size:13px; padding:4px 12px}
-@media (max-width:880px){
-  nav.sidenav{position:fixed; top:60px; left:0; right:0; bottom:0; background:var(--bg); padding:16px 20px; z-index:40; overflow:auto; display:none; border-top:1px solid var(--line)}
-  nav.sidenav.open{display:block}
+body{
+  margin:0;
+  font-family:"Karla",system-ui,-apple-system,sans-serif;
+  font-size:1.02rem; line-height:1.68;
+  color:var(--fg); background:var(--bg);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
 }
-
-/* hero */
-.hero{padding-block:56px 10px; border-bottom:1px solid var(--line); margin-bottom:30px; position:relative}
-.hero::before{content:""; position:absolute; inset:0 0 auto; height:220px; background:radial-gradient(600px 200px at 70% -20%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%), radial-gradient(400px 180px at 20% -10%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 70%); pointer-events:none}
-.eyebrow{font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent2); font-weight:500}
-.hero h1{font-size:clamp(34px,5.4vw,54px); margin:.2em 0 .18em; letter-spacing:-.02em}
-.hero .lede{font-size:clamp(16px,1.6vw,19px); color:var(--fg2); max-width:62ch}
-.statrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:26px}
-.stat{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; min-width:132px; box-shadow:var(--shadow)}
-.stat b{display:block; font-family:"Space Grotesk",sans-serif; font-size:23px; color:var(--accent2); letter-spacing:-.02em}
-.stat span{font-size:12px; color:var(--fg2); letter-spacing:.05em; text-transform:uppercase}
-
-/* sections */
-section{padding-top:38px; scroll-margin-top:82px}
-section>h2{font-size:clamp(24px,3vw,30px); margin-bottom:8px; display:flex; align-items:center; gap:12px}
-section>h2 .num{font-family:"JetBrains Mono",monospace; font-size:14px; font-weight:700; color:var(--accent-ink); background:var(--accent); border-radius:9px; padding:2px 9px; letter-spacing:.04em; box-shadow:var(--shadow)}
-section>h2::after{content:""; flex:1; height:1px; background:var(--line); margin-top:6px}
+img,svg{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none;font-weight:600}
+a:hover{color:var(--accent2);text-decoration:underline;text-underline-offset:3px}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.9em;padding:.12em .35em;border-radius:6px;background:var(--code-bg);color:var(--code-fg);border:1px solid var(--line)}
+em.hl{font-style:normal;background:linear-gradient(transparent 58%, color-mix(in srgb, var(--accent) 24%, transparent) 58%);padding:0 .12em;border-radius:3px}
+.term{font-variant:small-caps;letter-spacing:.03em;color:var(--accent);font-weight:700}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2.5px solid var(--ring);outline-offset:2px;border-radius:4px}
+:root{scrollbar-color:var(--accent) transparent}
+h1,h2,h3,h4{
+  font-family:"Playfair Display",Georgia,"Times New Roman",serif;
+  font-weight:620; line-height:1.14; letter-spacing:-.012em;
+  color:var(--fg); margin:1.9em 0 .45em;
+}
+h1{font-size:clamp(2.3rem,5.2vw,3.7rem);font-weight:640;letter-spacing:-.02em}
+h2{
+  font-size:clamp(1.7rem,3.4vw,2.3rem);
+  position:relative; padding-bottom:.28em;
+}
+h2::after{
+  content:""; position:absolute; left:0; bottom:0;
+  width:54px; height:3px; border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2)); opacity:.85;
+}
+h3{font-size:clamp(1.2rem,2vw,1.45rem);font-weight:600}
+h4{font-size:1.08rem;font-weight:600;letter-spacing:.01em}
+p{margin:.55em 0 1.15em;color:var(--fg)}
+ul,ol{margin:.4em 0 1.2em;padding-left:1.35em}
+li{margin:.28em 0}
+::marker{color:var(--accent)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.layout{display:grid;grid-template-columns:248px minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+main{min-width:0;padding:8px 0 80px}
+.topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;gap:16px;
+  padding:14px clamp(18px,4vw,40px);
+  background:color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-bottom:1px solid color-mix(in srgb, var(--line) 60%, transparent);
+}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Playfair Display",serif;font-size:1.22rem;font-weight:640;letter-spacing:.01em;color:var(--fg);white-space:nowrap}
+.mark{
+  width:34px;height:34px;flex:none;
+  display:grid;place-items:center; border-radius:10px;
+  color:var(--accent-ink);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 4px 14px color-mix(in srgb, var(--accent) 45%, transparent);
+  font-family:"Playfair Display",serif;font-weight:700;font-size:1.05rem;
+}
+.spacer{flex:1}
+.theme-btn,.menu-btn{
+  font:inherit;cursor:pointer;
+  border:1px solid var(--line); border-radius:999px;
+  background:var(--card);color:var(--fg);
+  padding:8px 15px;font-size:.92rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+.theme-btn:hover,.menu-btn:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 6px 16px var(--shadow)}
+.menu-btn{display:none}
+.sidenav{
+  position:sticky;top:88px; padding:6px 4px; border-radius:var(--radii);
+}
+.sidenav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.sidenav a{
+  display:block;padding:9px 14px; border-radius:10px;
+  color:var(--fg2);font-weight:600;font-size:.96rem;
+  border-left:3px solid transparent;
+  transition:background .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;
+}
+.sidenav a:hover{background:color-mix(in srgb, var(--accent) 10%, transparent);color:var(--fg);text-decoration:none;transform:translateX(2px)}
+.sidenav a:active,.sidenav a.is-active{
+  color:var(--accent);border-left-color:var(--accent);
+  background:color-mix(in srgb, var(--accent) 12%, transparent);
+}
+.sub{margin-top:6px;padding:4px 0 6px 22px;border-left:1px dashed var(--line)}
+.sub a{font-size:.9rem;padding:6px 12px}
+.hero{
+  position:relative;
+  padding:clamp(34px,6vw,72px) 0 clamp(28px,5vw,52px);
+  margin-bottom:16px; border-bottom:1px solid var(--line); overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 82% 12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 52%),
+             var(--contour);
+  pointer-events:none; opacity:.9;
+}
+.hero::after{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent) 22%,var(--accent2) 78%,transparent);
+  opacity:.8;
+}
+.hero>*{position:relative;z-index:1}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent); margin-bottom:14px;
+  animation:fadeUp .7s ease both;
+}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--accent)}
+.hero h1{margin-top:0;animation:fadeUp .7s .06s ease both}
+.lede{font-size:clamp(1.05rem,1.7vw,1.24rem);color:var(--fg2);max-width:60ch;animation:fadeUp .7s .12s ease both}
+.statrow{display:flex;flex-wrap:wrap;gap:clamp(18px,3vw,44px);margin-top:26px;animation:fadeUp .7s .18s ease both}
+.stat{display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:"Playfair Display",serif;font-size:clamp(2rem,3.6vw,2.8rem);font-weight:640;color:var(--fg);line-height:1}
+.stat span{font-family:"IBM Plex Mono",monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg2)}
+.prose{max-width:76ch}
+.prose h2{scroll-margin-top:96px}
 .prose p{color:var(--fg)}
-.prose .muted{color:var(--fg2)}
-.card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:16px 0; box-shadow:var(--shadow); transition:transform .15s ease, border-color .15s ease}
-.card:hover{border-color:color-mix(in srgb, var(--accent) 35%, var(--line))}
-.card h3{font-size:19px; margin-bottom:6px}
-.kicker{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent2); margin-bottom:6px; font-weight:600}
-.grid2{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px}
-.grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px}
-
-/* badges */
-.badge{display:inline-flex; align-items:center; gap:6px; font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600; padding:.18em .7em; border-radius:999px; letter-spacing:.02em; white-space:nowrap}
-.badge::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor}
-.b-straight{background:var(--blue-ink); color:var(--blue); border:1px solid color-mix(in srgb, var(--blue) 45%, transparent)}
-.b-bent{background:var(--amber-ink); color:var(--amber); border:1px solid color-mix(in srgb, var(--amber) 45%, transparent)}
-.b-tree{background:var(--accent-ink); color:var(--accent2); border:1px solid color-mix(in srgb, var(--accent) 45%, transparent)}
-.b-general{background:var(--red-ink); color:var(--red); border:1px solid color-mix(in srgb, var(--red) 45%, transparent)}
-.b-static{background:var(--blue-ink); color:var(--blue); border:1px solid color-mix(in srgb, var(--blue) 45%, transparent)}
-.b-patrol{background:var(--amber-ink); color:var(--amber); border:1px solid color-mix(in srgb, var(--amber) 45%, transparent)}
-
-/* flow */
-.flow{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:10px 0}
-.flow .step{background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:8px 12px; font-size:13.5px; font-weight:500}
-.flow .arrow{color:var(--accent2); font-weight:800}
-
-/* callouts */
-.callout{border-left:4px solid var(--accent); background:color-mix(in srgb, var(--accent) 6%, var(--card)); border-radius:0 12px 12px 0; padding:16px 20px; margin:16px 0; border:1px solid var(--line); border-left-width:4px}
-.callout.warn{border-left-color:var(--amber); background:color-mix(in srgb, var(--amber) 7%, var(--card))}
-.callout.danger{border-left-color:var(--red); background:color-mix(in srgb, var(--red) 6%, var(--card))}
-.callout .cttl{font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:4px; font-weight:700; color:var(--accent2)}
-.callout.warn .cttl{color:var(--amber)}
-.callout.danger .cttl{color:var(--red)}
-
-/* tables */
-.tablewrap{overflow-x:auto; margin:14px 0; border-radius:12px; border:1px solid var(--line)}
-table{border-collapse:collapse; font-size:14px; min-width:560px; background:var(--card); width:100%}
-th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
-thead th{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent2); background:var(--bg2); font-weight:700}
-tbody tr:nth-child(even){background:color-mix(in srgb, var(--bg2) 45%, transparent)}
-tbody tr:last-child td{border-bottom:none}
-
-/* playground */
-.playground{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:22px; margin:20px 0; box-shadow:var(--shadow)}
-.pg-controls{display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; margin-bottom:16px}
-.pg-controls label{display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--fg2); letter-spacing:.04em; font-weight:600}
-.pg-controls select,.pg-controls input[type=number]{background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:10px; padding:8px 11px; font:inherit; font-size:14px}
-.pg-controls button{background:var(--accent); color:#fff; border:none; border-radius:10px; padding:10px 20px; font:inherit; font-weight:700; cursor:pointer; box-shadow:var(--shadow)}
-.pg-controls button:hover{background:var(--accent2)}
-.pg-body{display:grid; grid-template-columns:minmax(200px,auto) 1fr; gap:20px; align-items:start}
-@media (max-width:680px){ .pg-body{grid-template-columns:1fr} }
-canvas.pg-canvas{width:100%; height:auto; background:var(--bg2); border:1px solid var(--line); border-radius:12px; display:block}
-.pg-stats{font-size:14px; color:var(--fg2); line-height:1.75}
-.pg-stats .big{font-family:"Space Grotesk",sans-serif; font-size:19px; color:var(--accent2); font-weight:700}
-.legend{display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; font-size:12.5px; color:var(--fg2)}
-.legend i{width:14px; height:14px; border-radius:4px; display:inline-block; margin-right:5px; vertical-align:-2px}
-
-/* quiz */
-.quiz-q{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:12px 0; box-shadow:var(--shadow)}
-.quiz-q .qtitle{font-weight:600; margin-bottom:10px; font-size:15.5px}
-.quiz-q label{display:block; padding:7px 10px; border-radius:8px; cursor:pointer; font-size:14.5px}
-.quiz-q label:hover{background:var(--bg2)}
-.quiz-q input{accent-color:var(--accent); margin-right:9px}
-.quiz-q .reveal{display:none; margin-top:10px; padding:11px 13px; border-radius:8px; background:var(--accent-ink); color:var(--accent2); font-size:14px; border:1px solid color-mix(in srgb, var(--accent) 30%, transparent)}
-.quiz-q .reveal.show{display:block}
-.quiz-q.correct{border-color:var(--accent)}
-.quiz-q.wrong{border-color:var(--red)}
-
-/* details */
-details{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:15px 18px; margin:10px 0; box-shadow:var(--shadow)}
-details summary{cursor:pointer; font-weight:600; font-size:15.5px; list-style:none}
-details summary::before{content:"▸"; display:inline-block; margin-right:10px; color:var(--accent2); transition:transform .15s}
-details[open] summary::before{transform:rotate(90deg)}
-details .body{padding-top:10px; color:var(--fg2)}
-
-/* glossary */
-.gloss{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px}
-.gloss .gterm{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 15px; font-size:14px; box-shadow:var(--shadow)}
-.gloss .gterm b{color:var(--accent2); font-family:"JetBrains Mono",monospace; font-size:12.5px; text-transform:uppercase; letter-spacing:.05em}
-.gloss .gterm p{margin:.25em 0 0; color:var(--fg2); font-size:13.5px}
-
-/* code listings (fixed dark terminal) */
-pre.python-code{background:var(--code-bg); border:1px solid #1f2b33; border-radius:14px; padding:10px 0; overflow-x:auto; margin:14px 0; box-shadow:var(--shadow); font-size:13px; line-height:1.6; max-height:560px; overflow-y:auto}
-pre.python-code code{display:block; min-width:max-content; color:var(--code-fg)}
-.pl{display:flex}
-.ln{flex:0 0 2.6em; text-align:right; padding-right:14px; color:#4e6270; user-select:none; font-size:12px; opacity:.8}
-.pc{flex:1; white-space:pre}
-.tok-com{color:#5f7480; font-style:italic}
-.tok-str{color:#f2b56b}
-.tok-num{color:#b7a7f0}
-.tok-kw{color:#53d9b4; font-weight:600}
-.tok-bi{color:#79c3ff}
-.code-note{margin:12px 0 0; font-size:14px; color:var(--fg2)}
-.code-note b{color:var(--accent2)}
-
-/* deep dive */
-.dd-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:16px 0}
-.dd-panel{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow)}
-.dd-panel h3{font-size:17px; margin-bottom:6px}
-.formula{font-family:"JetBrains Mono",monospace; background:var(--bg2); border:1px solid var(--line); border-radius:10px; padding:10px 14px; margin:10px 0; font-size:14px; overflow-x:auto}
-.timeline{display:flex; gap:0; margin:14px 0; overflow-x:auto}
-.tl-cell{flex:0 0 auto; min-width:56px; text-align:center; padding:8px 6px; border:1px solid var(--line); border-left:none; font-size:12.5px}
-.tl-cell:first-child{border-left:1px solid var(--line); border-radius:10px 0 0 10px}
-.tl-cell:last-child{border-radius:0 10px 10px 0}
-.tl-turn{background:var(--bg2); font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:700; color:var(--accent2)}
-.tl-cell.patrol{background:var(--amber-ink); color:var(--amber); font-weight:600}
-.tl-cell.collide{background:var(--red-ink); color:var(--red); font-weight:700; outline:2px solid var(--red)}
-.tl-cell.patrol .tl-turn{background:var(--amber-ink)}
-
-/* back to top + pager */
-.toTop{position:fixed; right:max(18px, env(safe-area-inset-right,0px)); bottom:max(18px, env(safe-area-inset-bottom,0px)); z-index:45; width:46px; height:46px; border-radius:50%; border:1px solid var(--line); background:var(--accent); color:#fff; font-size:20px; line-height:1; cursor:pointer; box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease}
-.toTop.show{opacity:1; pointer-events:auto}
-.toTop:hover{transform:translateY(-2px)}
-.pager{display:flex; gap:12px; margin-top:42px; padding-top:20px; border-top:1px solid var(--line)}
-.pager a{flex:1; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; color:var(--fg); box-shadow:var(--shadow); min-width:0; transition:border-color .12s}
-.pager a .ps{display:block; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent2); margin-bottom:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:700}
-.pager a .pt{display:block; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
-.pager a.next{text-align:right}
-.pager a:hover{border-color:var(--accent); text-decoration:none}
-.pager a:only-child{margin-left:auto; margin-right:auto; max-width:50%}
-@media (max-width:560px){ .pager{flex-direction:column} .pager a:only-child{max-width:100%} }
-
-footer{border-top:1px solid var(--line); padding:28px 0 64px; color:var(--fg2); font-size:13.5px}
+.muted{color:var(--fg2)}
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radii);
+  padding:clamp(20px,3vw,30px); box-shadow:var(--shadow);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.card:hover{transform:translateY(-3px);border-color:color-mix(in srgb, var(--accent) 40%, var(--line))}
+.kicker{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent); display:block; margin-bottom:6px;
+}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.84rem;font-weight:700;
+  padding:5px 13px;border-radius:999px; border:1px solid transparent; line-height:1.3;
+}
+.badge::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.9}
+.b-straight{background:color-mix(in srgb, var(--blue) 15%, transparent);color:var(--blue);border-color:color-mix(in srgb, var(--blue) 32%, transparent)}
+.b-bent{background:color-mix(in srgb, var(--violet) 15%, transparent);color:var(--violet);border-color:color-mix(in srgb, var(--violet) 32%, transparent)}
+.b-tree{background:color-mix(in srgb, var(--accent) 15%, transparent);color:var(--accent);border-color:color-mix(in srgb, var(--accent) 34%, transparent)}
+.b-general{background:color-mix(in srgb, var(--amber) 18%, transparent);color:var(--amber-ink);border-color:color-mix(in srgb, var(--amber) 40%, transparent)}
+.b-static{background:color-mix(in srgb, var(--red) 14%, transparent);color:var(--red);border-color:color-mix(in srgb, var(--red) 32%, transparent)}
+.b-patrol{background:color-mix(in srgb, var(--blue) 15%, transparent);color:var(--blue);border-color:color-mix(in srgb, var(--blue) 32%, transparent)}
+.flow{display:flex;flex-direction:column;gap:0}
+.step{
+  position:relative; padding:16px 18px 16px 58px;
+  background:var(--card); border:1px solid var(--line); border-radius:14px;
+}
+.step::before{
+  content:attr(data-step); position:absolute; left:16px; top:16px;
+  width:28px; height:28px; border-radius:50%;
+  display:grid;place-items:center;
+  font-family:"IBM Plex Mono",monospace;font-size:.82rem;font-weight:700;
+  color:var(--accent-ink);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 3px 10px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.arrow{align-self:flex-start;margin-left:30px;padding:2px 0 2px 18px;color:var(--accent);font-size:1.25rem;line-height:1;font-weight:700}
+.arrow::before{content:"↓"}
+.callout{
+  position:relative; border-radius:14px;
+  padding:18px 20px 18px 54px; margin:1.2em 0;
+  border:1px solid var(--line); background:var(--card);
+}
+.callout .sym{position:absolute;left:16px;top:14px;font-size:1.1rem;font-weight:700;color:var(--accent);width:26px;text-align:center}
+.warn{border-color:color-mix(in srgb, var(--amber) 55%, var(--line));background:color-mix(in srgb, var(--amber) 10%, var(--card))}
+.warn .sym{color:var(--amber-ink)}
+.danger{border-color:color-mix(in srgb, var(--red) 55%, var(--line));background:color-mix(in srgb, var(--red) 9%, var(--card))}
+.danger .sym{color:var(--red)}
+.analogy{border-color:color-mix(in srgb, var(--blue) 50%, var(--line));background:color-mix(in srgb, var(--blue) 9%, var(--card))}
+.analogy .sym{color:var(--blue)}
+.cttl{font-weight:800;display:block;margin-bottom:4px;color:var(--fg)}
+.tablewrap{
+  overflow-x:auto; border:1px solid var(--line); border-radius:14px;
+  background:var(--card); box-shadow:var(--shadow); margin:1.2em 0;
+}
+table{border-collapse:collapse;width:100%;min-width:600px;font-size:.96rem}
+thead th{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.1em;
+  text-transform:uppercase; text-align:left;
+  color:var(--accent);
+  background:color-mix(in srgb, var(--bg2) 70%, var(--card));
+  padding:13px 16px; border-bottom:2px solid var(--accent); white-space:nowrap;
+}
+td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--fg)}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .14s ease}
+tbody tr:hover{background:color-mix(in srgb, var(--accent) 7%, transparent)}
+.playground{background:var(--card);border:1px solid var(--line);border-radius:var(--radii);overflow:hidden;box-shadow:var(--shadow)}
+.pg-controls{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+  padding:16px 20px; border-bottom:1px solid var(--line);
+  background:color-mix(in srgb, var(--bg2) 60%, var(--card));
+}
+.pg-controls label{font-size:.9rem;font-weight:600;color:var(--fg2)}
+.pg-controls input[type="range"]{accent-color:var(--accent)}
+.pg-controls select,.pg-controls button{
+  font:inherit;font-size:.9rem; padding:8px 14px; border-radius:9px;
+  border:1px solid var(--line);background:var(--card);color:var(--fg);
+  cursor:pointer; transition:border-color .15s ease;
+}
+.pg-controls button:hover{border-color:var(--accent)}
+.pg-controls button.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-ink);border-color:transparent;font-weight:700}
+.pg-body{padding:20px}
+.pg-canvas{min-height:220px;border:1.5px dashed var(--line);border-radius:12px;background:color-mix(in srgb, var(--bg) 60%, var(--card));display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;color:var(--fg2);font-size:.92rem}
+.pg-stats{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.pg-stats span{font-family:"IBM Plex Mono",monospace;font-size:.82rem;padding:5px 12px;border-radius:999px;background:color-mix(in srgb, var(--accent) 12%, transparent);color:var(--accent);border:1px solid color-mix(in srgb, var(--accent) 30%, transparent)}
+.pg-stats .big{font-family:"Playfair Display",serif;font-size:1.35rem;font-weight:640;color:var(--accent);padding:2px 14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px;font-size:.86rem;color:var(--fg2);align-items:center}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid color-mix(in srgb, var(--line) 60%, transparent)}
+.quiz-q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:16px 0;transition:border-color .2s ease,box-shadow .2s ease}
+.quiz-q:hover{border-color:color-mix(in srgb, var(--accent) 35%, var(--line))}
+.qtitle{font-weight:800;font-size:1.06rem;margin-bottom:12px;display:block;color:var(--fg)}
+.quiz-q label{display:block;padding:9px 14px;border-radius:10px;cursor:pointer;transition:background .14s ease;border:1px solid transparent;margin:6px 0}
+.quiz-q label:hover{background:color-mix(in srgb, var(--accent) 9%, transparent)}
+.quiz-q input[type="radio"]{accent-color:var(--accent);margin-right:10px}
+.reveal{display:none;margin-top:14px;padding:14px 16px;border-radius:10px;background:color-mix(in srgb, var(--blue) 10%, transparent);border:1px solid color-mix(in srgb, var(--blue) 30%, transparent);color:var(--blue)}
+.reveal.show{display:block}
+.correct{background:color-mix(in srgb, var(--accent) 14%, transparent);border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);color:var(--accent)}
+.wrong{background:color-mix(in srgb, var(--red) 12%, transparent);border:1px solid color-mix(in srgb, var(--red) 40%, transparent);color:var(--red)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0;margin:12px 0;overflow:hidden;transition:border-color .2s ease}
+details[open]{border-color:color-mix(in srgb, var(--accent) 40%, var(--line))}
+details summary{cursor:pointer;list-style:none;font-weight:700;font-size:1rem;padding:16px 20px;display:flex;align-items:center;gap:12px;color:var(--fg);transition:color .15s ease}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";margin-left:auto;font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:500;color:var(--accent);line-height:1;transition:transform .2s ease}
+details[open] summary::after{transform:rotate(45deg)}
+details summary:hover{color:var(--accent)}
+details .body{padding:2px 20px 18px;color:var(--fg2);border-top:1px dashed var(--line);margin:0;padding-top:14px}
+.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:18px 0}
+.gloss > *{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:transform .18s ease,box-shadow .18s ease}
+.gloss > *:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.gterm{font-family:"Playfair Display",serif;font-weight:640;font-size:1.08rem;color:var(--accent);display:block;margin-bottom:4px}
+pre.python-code{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.9rem; line-height:1.7;
+  background:var(--code-bg); color:var(--code-fg);
+  border:1px solid var(--line); border-radius:14px;
+  padding:20px 22px; overflow-x:auto; margin:1.2em 0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), var(--shadow);
+  tab-size:4;
+}
+pre.python-code code{font:inherit;background:none;border:none;padding:0;color:inherit}
+.pl{color:var(--fg2);user-select:none;display:inline-block;width:1.6em;text-align:right;margin-right:1.1em}
+.ln{color:var(--fg2);user-select:none;display:inline-block;width:1.6em;text-align:right;margin-right:1.1em}
+.pc{color:var(--accent);font-weight:600}
+.tok-com{color:var(--fg2);font-style:italic}
+.tok-str{color:var(--accent2)}
+.tok-num{color:var(--violet)}
+.tok-kw{color:var(--blue);font-weight:700}
+.tok-bi{color:var(--red);font-weight:700}
+.code-note{display:block;font-family:"IBM Plex Mono",monospace;font-size:.78rem;color:var(--fg2);margin-top:10px;letter-spacing:.02em}
+.progress{height:10px;background:color-mix(in srgb, var(--line) 55%, transparent);border-radius:999px;overflow:hidden;position:relative}
+.progress::after{content:"";display:block;height:100%;width:var(--p,62%);border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .6s cubic-bezier(.2,.7,.2,1)}
+#progressBar{position:fixed;top:0;left:0;height:4px;width:0;z-index:90;border-radius:0;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+#progressBar::after{content:none}
+.dd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.dd-panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radii);padding:24px;box-shadow:var(--shadow)}
+.formula{
+  font-family:"Playfair Display",serif; font-size:1.35rem; text-align:center;
+  padding:18px; margin:14px 0;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--accent) 10%, var(--card)), var(--card));
+  border:1px dashed color-mix(in srgb, var(--accent) 40%, var(--line));
+  border-radius:12px; color:var(--fg);
+}
+.timeline{position:relative;padding-left:26px;margin:14px 0}
+.timeline::before{content:"";position:absolute;left:7px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--line))}
+.tl-cell{position:relative;padding:0 0 20px 6px}
+.tl-cell::before{content:"";position:absolute;left:-23px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--card);border:3px solid var(--accent)}
+.tl-turn{font-weight:800;font-family:"Playfair Display",serif;display:block;color:var(--fg)}
+.patrol{display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap}
+.patrol .badge{margin:2px}
+.collide{border:1.5px solid var(--red);background:color-mix(in srgb, var(--red) 8%, var(--card));border-radius:12px;padding:14px 16px;color:var(--red);font-weight:600}
+.pager{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;margin-top:44px;padding-top:24px;border-top:1px solid var(--line)}
+.ps,.pt,.next{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:.95rem;color:var(--fg);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.ps:hover,.pt:hover,.next:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow);text-decoration:none;color:var(--accent)}
+.ps::before{content:"←"}
+.pt::after{content:"→"}
+.next{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--accent-ink);border-color:transparent}
+.next::after{content:"→"}
+.next:hover{color:var(--accent-ink)}
+.toTop{
+  position:fixed;right:22px;bottom:22px;z-index:70;
+  width:46px;height:46px; border-radius:50%;
+  border:1px solid var(--line); background:var(--card);color:var(--fg);
+  font-size:1.2rem;font-weight:700; cursor:pointer;
+  display:grid;place-items:center; box-shadow:var(--shadow);
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .25s ease,transform .25s ease,background .2s ease,color .2s ease;
+}
+.toTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+.toTop:hover{background:var(--accent);color:var(--accent-ink)}
+.toTop::before{content:"↑"}
+footer{border-top:1px solid var(--line);background:color-mix(in srgb, var(--bg2) 55%, var(--bg));padding:clamp(28px,4vw,46px) 0 34px;margin-top:24px;position:relative}
+footer::before{content:"";position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--accent) 25%, var(--accent2) 75%, transparent);opacity:.75}
+footer .col{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+footer p{color:var(--fg2);font-size:.92rem;margin:0}
+footer a{color:var(--accent)}
+/* ---------- new lesson components ---------- */
+.lesson-hero{
+  font-family:"Playfair Display",serif;
+  font-size:clamp(1.15rem,2.2vw,1.5rem);
+  color:var(--accent); font-weight:600;
+  max-width:46ch; margin:.2em 0 1.2em; line-height:1.35;
+}
+.num{
+  font-family:"Playfair Display",serif;
+  font-weight:700; font-size:.62em;
+  color:var(--accent-ink); background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:10px; padding:.28em .6em; margin-right:.55em;
+  display:inline-block; vertical-align:2px;
+  box-shadow:0 3px 12px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.concept-grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px; margin:1.2em 0;
+}
+.concept-grid .card{padding:20px}
+.concept-grid details{margin:10px 0 0;border-radius:10px}
+.concept-grid details summary{font-size:.9rem;padding:10px 14px}
+.concept-grid details .body{padding:4px 14px 12px;font-size:.92rem}
+.steps-wrap,.list-wrap{margin:1.2em 0}
+.steps{counter-reset:step;list-style:none;padding-left:0}
+.steps li{
+  counter-increment:step;
+  position:relative; padding:14px 16px 14px 52px;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  margin:.6em 0;
+}
+.steps li::before{
+  content:counter(step);
+  position:absolute; left:14px; top:14px;
+  width:26px; height:26px; border-radius:50%;
+  display:grid;place-items:center;
+  font-family:"IBM Plex Mono",monospace; font-size:.82rem; font-weight:700;
+  color:var(--accent-ink);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.tick{list-style:none;padding-left:0}
+.tick li{
+  position:relative; padding-left:30px; margin:.45em 0;
+}
+.tick li::before{
+  content:""; position:absolute; left:0; top:.55em;
+  width:11px; height:11px;
+  transform:rotate(45deg);
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:2px;
+  box-shadow:0 2px 6px color-mix(in srgb, var(--accent) 40%, transparent);
+}
+.checklist{
+  margin:2em 0 0; padding:24px;
+  background:color-mix(in srgb, var(--bg2) 45%, var(--card));
+  border:1px dashed color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-radius:20px;
+}
+.checklist h3{margin-top:0}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.check{
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px 18px; position:relative; padding-left:52px;
+}
+.check .qmark{
+  position:absolute; left:14px; top:14px;
+  width:28px; height:28px; border-radius:50%;
+  display:grid;place-items:center;
+  font-family:"Playfair Display",serif; font-weight:700; font-size:1.05rem;
+  color:var(--accent-ink); background:linear-gradient(135deg,var(--accent),var(--accent2));
+}
+.check p{margin:0;font-size:.95rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media (max-width:920px){
+  .layout{grid-template-columns:1fr;gap:0}
+  .sidenav{
+    position:fixed;top:0;left:0;bottom:0;
+    width:280px;max-width:84vw; z-index:80;
+    background:var(--card); border-right:1px solid var(--line);
+    padding:84px 18px 24px; overflow-y:auto;
+    transform:translateX(-105%);
+    transition:transform .28s cubic-bezier(.2,.7,.2,1);
+    box-shadow:var(--shadow);
+  }
+  .sidenav.open{transform:translateX(0)}
+  .menu-btn{display:inline-flex}
+  .topbar{padding:12px 18px}
+  .hero{padding-top:30px}
+}
+@media (max-width:520px){
+  body{font-size:.99rem}
+  .statrow{gap:18px}
+  .brand{font-size:1.08rem}
+  .mark{width:30px;height:30px}
+  pre.python-code{padding:16px;font-size:.84rem}
+}
 
 </style>
 </head>
@@ -241,7 +479,6 @@ footer{border-top:1px solid var(--line); padding:28px 0 64px; color:var(--fg2); 
 
 <div class="progress" id="progressBar"></div>
 
-<!-- ================= TOPBAR ================= -->
 <div class="topbar"><div class="wrap">
   <div class="brand"><span class="mark">A</span>Adventure Study Guide</div>
   <div class="spacer"></div>
@@ -251,198 +488,100 @@ footer{border-top:1px solid var(--line); padding:28px 0 64px; color:var(--fg2); 
 
 <div class="wrap layout">
 
-  <!-- ================= SIDE NAV ================= -->
   <nav class="sidenav" id="sidenav" aria-label="Contents">
     <ul>
-      <li><a href="#overview">01 · What you built</a></li>
-      <li><a href="#world">02 · The world model</a></li>
-      <li><a href="#entities">03 · The entities</a></li>
-      <li><a href="#terrain">04 · Terrain generation</a></li>
-      <li><a href="#level">05 · Level generation</a></li>
-      <li><a href="#controller">06 · The controller</a></li>
-      <li><a href="#enemies">07 · Enemies &amp; patrols</a></li>
-      <li><a href="#scoring">08 · Scoring &amp; limits</a></li>
-      <li><a href="#determinism">09 · Why seeds matter</a></li>
-      <li><a href="#verification">10 · How we verified it</a></li>
-      <li><a href="#defend">11 · Defend your project</a></li>
-      <li><a href="#code">12 · Read the code</a></li>
-      <li><ul class="sub">
-        <li><a href="#code-character">character.py</a></li>
-        <li><a href="#code-artifact">artifact.py</a></li>
-        <li><a href="#code-enemy">enemy.py</a></li>
-        <li><a href="#code-terrain">terrain_generator.py</a></li>
-        <li><a href="#code-level">level_generator.py</a></li>
-        <li><a href="#code-controller">controller.py</a></li>
-      </ul></li>
-      <li><a href="#deepdive">13 · Deep dive</a></li>
-      <li><ul class="sub">
-        <li><a href="#dd-run">Run anatomy</a></li>
-        <li><a href="#dd-planner">The planner</a></li>
-        <li><a href="#dd-patrol">Patrol timing</a></li>
-        <li><a href="#dd-scoring">Scoring math</a></li>
-        <li><a href="#dd-referee">Inside the referee</a></li>
-      </ul></li>
-      <li><a href="#playground">Playground</a></li>
-      <li><a href="#quiz">Self-check</a></li>
-      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#overview">01 · What you built</a></li><li><a href="#world">02 · The world model</a></li><li><a href="#entities">03 · The entities</a></li><li><a href="#terrain">04 · Terrain generation</a></li><li><a href="#level">05 · Level generation</a></li><li><a href="#controller">06 · The controller</a></li><li><a href="#planning">07 · How the controller plans</a></li><li><a href="#enemies">08 · Enemies &amp;amp; patrols</a></li><li><a href="#scoring">09 · Scoring &amp; limits</a></li><li><a href="#determinism">10 · Why seeds matter</a></li><li><a href="#verification">11 · How we verified it</a></li><li><a href="#defend">12 · Defend your project</a></li><li><a href="#code">13 · Read the code</a></li><li><ul class="sub"><li><a href="#code-character">character.py</a></li><li><a href="#code-artifact">artifact.py</a></li><li><a href="#code-enemy">enemy.py</a></li><li><a href="#code-terrain">terrain_generator.py</a></li><li><a href="#code-level">level_generator.py</a></li><li><a href="#code-controller">controller.py</a></li></ul></li><li><a href="#deepdive">14 · Deep dive</a></li><li><ul class="sub"><li><a href="#dd-run">Run anatomy</a></li><li><a href="#dd-planner">The planner</a></li><li><a href="#dd-patrol">Patrol timing</a></li><li><a href="#dd-scoring">Scoring math</a></li><li><a href="#dd-referee">Inside the referee</a></li></ul></li><li><a href="#playground">15 · Playground</a></li><li><a href="#quiz">16 · Self-check</a></li><li><a href="#glossary">17 · Glossary</a></li>
     </ul>
   </nav>
 
-  <!-- ================= MAIN ================= -->
   <main>
 
     <header class="hero">
       <div class="eyebrow">CMU-PH · Adventure Workbench · src/student</div>
-      <h1>Learn the project you built</h1>
-      <p class="lede">The full course: learn every concept, then read the real code of all six student modules with plain-language notes — so you can explain, defend, and extend it yourself.</p>
+      <h1>Chart every concept of the project you built</h1>
+      <p class="lede">A complete field guide to the Adventure Workbench — learn each concept plainly, then read the real source of all six modules. Know it well enough to defend it.</p>
       <div class="statrow">
         <div class="stat"><b>6</b><span>student modules</span></div>
+        <div class="stat"><b>12</b><span>concept expeditions</span></div>
         <div class="stat"><b>4</b><span>terrain topologies</span></div>
-        <div class="stat"><b>7</b><span>actions</span></div>
         <div class="stat"><b>142/142</b><span>engine worlds pass</span></div>
       </div>
     </header>
 
-    <!-- =============== 01 OVERVIEW =============== -->
+    
     <section id="overview">
       <h2><span class="num">01</span>What you built</h2>
-      <div class="prose">
-        <p>The <em class="hl">Adventure workbench</em> is a teaching platform. It generates little grid-worlds — maps with floor, walls, rewards, and enemies — and then asks an <strong>agent controller</strong> to explore one, collect useful things, clear what blocks it, reach the exit, and leave. Grading is automatic: a referee checks your code for <em class="hl">determinism</em> (same input gives the same output), rule-following, and solvable levels.</p>
-        <p>Your six modules in <code>src/student/</code> each own one slice of the story:</p>
-      </div>
-      <div class="grid2">
-        <div class="card"><div class="kicker">Data objects</div><h3>character · artifact · enemy</h3><p class="muted">Pure data holders. They describe <em>what exists</em> in a world: who the explorer is, what a reward is worth, what penalty an enemy adds when cleared.</p></div>
-        <div class="card"><div class="kicker">Generators</div><h3>terrain_generator · level_generator</h3><p class="muted">Procedural world-builders. They turn a <em>specification</em> plus a <em>seed</em> into a concrete, repeatable map. Terrain builds the floor layout; level places the exit, rewards, and enemies.</p></div>
-        <div class="card"><div class="kicker">Brain</div><h3>controller</h3><p class="muted">The agent. It sees a read-only <em>snapshot</em> each turn and must return exactly one action. Everything interesting about decision-making lives here.</p></div>
-      </div>
-      <div class="callout">
-        <div class="cttl">The pipeline</div>
-        <div class="flow">
-          <span class="step">Spec + seed</span><span class="arrow">→</span>
-          <span class="step">TerrainGenerator</span><span class="arrow">→</span>
-          <span class="step">LevelGenerator</span><span class="arrow">→</span>
-          <span class="step">World</span><span class="arrow">→</span>
-          <span class="step">Controller</span><span class="arrow">→</span>
-          <span class="step">Snapshot / action loop</span>
-        </div>
-        <p class="muted" style="margin-top:8px">The same seed must rebuild the same world every time — that's what lets an automated referee grade hundreds of runs fairly.</p>
-      </div>
+      <p class="lesson-hero">Six modules, one pipeline, zero designers: your code builds the world it plays.</p>
+      <div class="prose"><p>Adventure Workbench is a game world — a grid you walk your character through. But nothing in it was hand-made. Your job was to write the code that builds the world and then decides how to move through it. You won&#x27;t touch any art or engine. All six student modules live in src/student/, and each has one job. The interesting part is how it gets checked: not by a human watching you play, but by an automated referee that runs your code against a fixed specification. By the end of this, you&#x27;ll be able to explain what each module does, how the pieces connect in a pipeline, and why &quot;same seed, same world&quot; is the backbone the whole thing relies on.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Module</div><p class="muted">A single file of code with one clear job. This project has six student modules in src/student/: character.py, artifact.py, enemy.py, terrain_generator.py, level_generator.py, and controller.py.</p><details><summary>Deeper</summary><div class="body">Each keeps the exact function signatures the workbench expects — change them and the referee can&#x27;t talk to your code.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Pipeline</div><p class="muted">The fixed order work flows through: a spec plus a seed go in, the terrain generator builds the map, the level generator places entities, the controller plays the world, and the referee grades the result.</p><details><summary>Deeper</summary><div class="body">Because the order is fixed, each stage knows exactly what shape its input will take.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Seed and determinism</div><p class="muted">A seed is a starting number. The same seed always produces the same world — like how the same recipe gives the same cake every time.</p><details><summary>Deeper</summary><div class="body">This is the backbone: because worlds are reproducible, the referee can replay them and compare your behavior against an expected result.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Snapshot</div><p class="muted">An immutable picture of the world at one moment — where your agent is, where enemies and patrols are, what you&#x27;ve collected. You can look at it but never change it.</p><details><summary>Deeper</summary><div class="body">Every turn the controller receives a fresh snapshot and must return one action based only on it.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Action</div><p class="muted">One choice your controller makes per turn: MOVE, COLLECT, ENGAGE, WAIT, or EXIT.</p><details><summary>Deeper</summary><div class="body">The engine accepts or rejects it, advances the clock, and hands back the next snapshot.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Referee (validator)</div><p class="muted">An automated grader. It runs your modules against a spec&#x27;s private test worlds and reports pass/fail — no human watches your screen.</p><details><summary>Deeper</summary><div class="body">It also drives the real engine (run_public) to replay whole worlds and confirm your character actually reaches the exit.</div></details></div></div>
+      <div class="prose"><h3>What you actually built</h3><p>Adventure Workbench is a game you never see. There&#x27;s no art, no story, no hand-made dungeon. Instead, there&#x27;s a world made purely of data — a grid of tiles, your agent&#x27;s position, enemies, patrols, artifacts, and an exit. You wrote the code that generates that world and then decides how to move through it. If it all works, the whole thing runs end-to-end with no human touching it.</p></div><div class="steps-wrap"><h3>How the pipeline runs</h3><ol class="steps"><li>A spec (the rules for this scenario) and a seed (a starting number) go in.</li><li>terrain_generator.py carves traversable terrain from that seed.</li><li>level_generator.py places the exit, artifacts, enemies, and patrols in legal spots.</li><li>Together those two form the World — one reproducible stage.</li><li>The controller (controller.py) reads a snapshot every turn and returns one action.</li><li>The referee runs validators, then replays the world with the real engine to grade it.</li></ol></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>The pipeline is a factory assembly line. The terrain generator hands a part to the level generator, which snaps the finished world onto the belt. Then the controller is the worker at the end who reads the label on each item and does exactly one thing to it before it moves on. If any worker stops or does the wrong step, the whole line stalls.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Why determinism is the backbone</div><p>If a seed produced a different world each run, grading would break: the referee couldn&#x27;t replay the same test twice, and a lucky or unlucky layout would decide your score. Because the same seed always yields the same world, every run is a fair, repeatable test. That is also why the generators must never lean on randomness that ignores the seed.</p></div><div class="prose"><h3>What your modules actually do</h3><p>character.py is deliberately minimal — it builds your agent&#x27;s identity and fails fast if the id is invalid. The heavy lifting is in controller.py. It doesn&#x27;t wander: it plans a lowest-cost path to the exit using Dijkstra&#x27;s algorithm, a standard search method, tracking position, turn, and which enemies are defeated. It predicts where patrols will be before moving, so it never collides with one. It collects artifacts on the tile it stands on, engages static enemies that block the route, and exits the moment it reaches the exit tile.</p></div><div class="prose"><h3>Real numbers from the project</h3><p>The verification log records what actually passed: all 18 distinct spec groups pass both referee sessions. The controller completes all 142 certified engine worlds across every topology and mode — including all 8 patrol worlds. And a full live run of the real engine completes 8 of 8 straight-path worlds with a perfect score of 100.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 wrong idea</div><p>It&#x27;s easy to picture a robot watching a little character shuffle around a screen and nodding. That&#x27;s not how this works. The referee is a program, not a spectator. It runs your modules against hidden test worlds, checks their outputs against the spec, and replays full worlds through the real engine to confirm your agent actually reaches the exit. No human watches your screen — the grading is completely programmatic.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">The real point: defending code</div><p>This whole project is practice for a harder skill: standing behind code you didn&#x27;t fully write yourself. AI drafted much of this. Your job isn&#x27;t just to make it run — it&#x27;s to understand each module well enough to explain it, defend its choices, and spot where it could go wrong. That&#x27;s why each module is small and each idea maps to one clear concept: procedural generation, pathfinding, decision loops, and testing against a spec.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>If you run the same seed twice, why must you get the very same world, and what would break if you didn&#x27;t?</p></div><div class="check"><span class="qmark">?</span><p>Walk the pipeline: what does each of the six student modules feed into the next?</p></div><div class="check"><span class="qmark">?</span><p>What is the difference between a snapshot and an action, and why must the snapshot be immutable?</p></div><div class="check"><span class="qmark">?</span><p>How does the controller avoid running into a patrol, and why does it never try to fight one?</p></div></div></div>
     </section>
 
-    <!-- =============== 02 WORLD =============== -->
     <section id="world">
       <h2><span class="num">02</span>The world model</h2>
-      <div class="prose">
-        <p>A world is a rectangular <em class="hl">grid</em>. Each cell is either <strong>floor</strong> (traversable, drawn <code>.</code>) or <strong>wall</strong> (blocked, drawn <code>#</code>). Positions are <code>(row, column)</code> pairs — row 0 is the top, column 0 the left.</p>
-      </div>
-      <div class="grid3">
-        <div class="card"><div class="kicker">Terrain</div><p class="muted">The floor layout. Answers the only question geometry can: <em>is this cell walkable?</em></p></div>
-        <div class="card"><div class="kicker">Start &amp; exit</div><p class="muted">Two distinct cells. The explorer spawns at <em>start</em> and must reach <em>exit</em> to finish. Start and exit are separate coordinates — never letters stamped into the grid.</p></div>
-        <div class="card"><div class="kicker">Snapshot</div><p class="muted">A frozen photo of the whole state <em>on one turn</em>: terrain, your position, what you've collected or defeated, and where every enemy is right now. You may read it; you may not change it.</p></div>
-      </div>
-      <div class="callout warn">
-        <div class="cttl">Key distinction</div>
-        <p><code>terrain.is_traversable(pos)</code> only tells you the <em>floor geometry</em>. It does <strong>not</strong> tell you whether an enemy currently stands on that floor cell. A controller must consider both — geometry <em>and</em> occupancy — before moving. This single idea explains most of the subtle bugs in this project.</p>
-      </div>
+      <p class="lesson-hero">Your world is just a grid of floor and wall cells. Read it right and nothing sneaks past you.</p>
+      <div class="prose"><p>The world is the stage every other rule stands on. Before you can judge how an AI-written character moves, collects, or fights, you have to understand the ground under its feet. In this project the world is not a physics engine — it is data: a rectangle cut into small squares, each holding one of two symbols. By the end you can read any world from its raw text, tell a walkable cell from a wall, translate a position into a row and column, and know what a snapshot of the world contains. That is the foundation for defending everything else.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Cell</div><p class="muted">One square of the grid, holding a single character. It is either floor (&#x27;.&#x27;) or wall (&#x27;#&#x27;).</p><details><summary>Deeper</summary><div class="body">Cells are the smallest unit; an agent moves between neighboring cells one step at a time, north, south, west, or east.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Terrain</div><p class="muted">The whole layout of the world: a rectangular list of text rows, each row a string of &#x27;.&#x27; and &#x27;#&#x27; characters.</p><details><summary>Deeper</summary><div class="body">Terrain is stored as a tuple of strings, so the world is literally text you can open and verify.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Position</div><p class="muted">One specific cell&#x27;s address, written as Position(row, column). Row 0 is the top row, column 0 is the left column.</p><details><summary>Deeper</summary><div class="body">Order matters: row comes first. Confusing it with (x, y) flips your entire map.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Traversable</div><p class="muted">The single question the terrain answers: can a character stand on this cell? Only floor cells are traversable, and only when the position is inside the grid.</p><details><summary>Deeper</summary><div class="body">A wall is not a physical obstacle — it is simply a cell where is_traversable returns False.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">WorldSnapshot</div><p class="muted">A frozen copy of the world at one moment in the game: the terrain, where the agent is, the current turn, what&#x27;s been collected, and which actions are allowed.</p><details><summary>Deeper</summary><div class="body">It is immutable — you can read it but not change it. Each turn hands you a fresh snapshot.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Start and exit</div><p class="muted">Two distinct marked cells: where the agent begins, and where it must arrive to finish.</p><details><summary>Deeper</summary><div class="body">They must be different cells, and the floor between them must stay connected or the level cannot be won.</div></details></div></div>
+      <div class="prose"><h3>What the world is</h3><p>The world is a rectangle cut into small squares called cells. Each cell holds exactly one character of text. A &#x27;.&#x27; means floor — you can stand there. A &#x27;#&#x27; means wall — you cannot. In the code, the whole world is just a list of text rows, one string per row. Here is a tiny world, 2 rows tall and 3 columns wide:
+
+.##
+...
+
+Row 0 is &#x27;.##&#x27;: a floor, then two walls. Row 1 is &#x27;...&#x27;: three floor cells. That is the entire world. Nothing hidden behind it.</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Picture a street map drawn on graph paper. Each square is one city block. A floor cell is an open plaza — you can stand on it. A wall cell is a building — you cannot walk through it. The whole map is just labeled squares; the buildings don&#x27;t have physics. They are simply squares you are not allowed to stand in.</p></div><div class="steps-wrap"><h3>How to read a position</h3><ol class="steps"><li>A position is written Position(row, column).</li><li>row is how many rows down from the top — row 0 is the very top.</li><li>column is how many columns right from the left — column 0 is the far left.</li><li>So Position(1, 2) means: down one row, over two columns.</li><li>To ask whether you can stand on a cell, call terrain.is_traversable(Position(row, column)).</li></ol></div><div class="prose"><h3>Terrain answers one question</h3><p>Terrain answers exactly one question: is this cell walkable? The answer is yes only when two things are both true: the position is inside the grid, and the cell&#x27;s character is &#x27;.&#x27;. That is the whole job. A wall is not an obstacle in some physical sense — it is just a cell where is_traversable returns False. There is no climbing, no breaking walls, no diagonal shortcuts. You step north, south, west, or east into a floor cell, or you stop.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 misconception: position order</div><p>Misconception: a position is (x, y), like a graph. In this code it is not. Position takes row first, then column — and row 0 is the top, not the bottom. If you mentally swap them, every move is mirrored: up becomes right, down becomes left. When you read an AI-written project, getting this backwards turns a correct solution into an invisible bug.</p></div><div class="prose"><h3>The invisible rules</h3><p>The world also follows strict rules, and these are where broken AI-generated levels get caught. Every row must be the same length — otherwise the rectangle is not a rectangle. Every character must be &#x27;.&#x27; or &#x27;#&#x27;. And every floor cell must connect to the others in one unbroken region — no floating islands of floor cut off by walls. If a floor tile is unreachable, the level cannot be finished. The validator checks all of this, and so can you.</p></div><div class="prose"><h3>Start, exit, and the snapshot</h3><p>A level marks two special cells: start, where you begin, and exit, where you must arrive. They are always distinct cells. And at each moment of play you get a WorldSnapshot — a fixed, readable copy of the world at that turn. It bundles the terrain, the agent&#x27;s current position, the turn number, what has been collected and defeated, and which actions are allowed right now. It is frozen: you can look at it, but nothing you do changes this particular copy. Every turn hands you a fresh one.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Why defend the world</div><p>Why learn to read a world? Because in this project the world is data, not magic. It is text you can open and check. Look for a row with the wrong length, a stray character, a disconnected island of floor, or a start and exit that cannot connect. Catch one of those and you have found a real defect — and you have defended the project against an AI that almost made it look fine.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>In the row &#x27;##.&#x27;, which cells are floor and which are walls? What does terrain.is_traversable(Position(0, 2)) return?</p></div><div class="check"><span class="qmark">?</span><p>Why is Position(row, column) not the same as writing (x, y)? What goes wrong if you swap the two numbers?</p></div><div class="check"><span class="qmark">?</span><p>Imagine a floor tile on row 1 that no other floor cell touches. Why is that a problem, and which check would catch it?</p></div></div></div>
     </section>
 
-    <!-- =============== 03 ENTITIES =============== -->
     <section id="entities">
       <h2><span class="num">03</span>The entities</h2>
-      <p>Three small data objects describe the "things" in a world. Each is validated at construction time, so bad input fails immediately instead of silently misbehaving.</p>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Entity</th><th>Carries</th><th>Rule</th><th>Why it matters</th></tr></thead>
-        <tbody>
-          <tr><td><span class="term">Character</span></td><td>agent_id</td><td>A single identity string for the explorer.</td><td>Lets logs and the runtime label whose run this is.</td></tr>
-          <tr><td><span class="term">Artifact</span></td><td>artifact_id · position · value</td><td>Value must be non-negative (negative rejected).</td><td>A reward with negative points would be a trap the rules don't intend.</td></tr>
-          <tr><td><span class="term">Enemy</span></td><td>enemy_id · position · encounter_penalty</td><td>Penalty must be non-negative; validated through EnemyDefinition.</td><td>A "penalty" is a cost you pay to clear a blocker — it can't be a bonus.</td></tr>
-        </tbody>
-      </table></div>
-      <div class="callout">
-        <div class="cttl">An artifact is not auto-collected</div>
-        <p>Walking onto an artifact's tile <strong>does not</strong> collect it. The runtime only records a collection when the controller explicitly issues a <code>COLLECT</code> action on that cell, naming the artifact. Rewards are choices, not justthings.</p>
-      </div>
+      <p class="lesson-hero">Three small objects hold the whole game world — and every one checks its inputs before it exists.</p>
+      <div class="prose"><p>This lesson covers the three building blocks that describe everything in the game: the player character, the artifacts you collect, and the enemies that punish you. Each one is a small Python class — a blueprint for making objects. By the end you will understand what an entity is, where its data comes from, and why creating one is more than just storing a few numbers. You will see why a negative score gets rejected instead of quietly fixed, and why every value is read-only once it exists. That pattern is the first line of defense in this AI-written codebase: garbage gets stopped at the door, never silently accepted.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Entity</div><p class="muted">An entity is any object in the game world that has a fixed identity — here, exactly three kinds: the character, artifacts, and enemies.</p><details><summary>Deeper</summary><div class="body">Each entity wraps a canonical definition from src.api, so the game never carries two slightly different copies of the same fact.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Canonical definition</div><p class="muted">A canonical definition is a single, authoritative description of what valid data looks like, defined once in src.api and reused by the whole project.</p><details><summary>Deeper</summary><div class="body">Because all validation lives there, every place that creates a character, artifact, or enemy gets the same rules automatically — no one can bypass them.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Read-only property</div><p class="muted">A read-only property is a value you can look at but never change after the object is created.</p><details><summary>Deeper</summary><div class="body">The @property decorator with no setter means nothing outside the class can reassign it — the data is frozen, which prevents accidental edits.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Fail-fast validation</div><p class="muted">Fail-fast validation means rejecting bad input the moment it arrives, rather than fixing it or ignoring it.</p><details><summary>Deeper</summary><div class="body">A negative artifact value or empty ID raises an error immediately at creation, so a bug becomes loud and obvious instead of hiding until later.</div></details></div></div>
+      <div class="prose"><h3>What an entity is</h3><p>Think of the game world as a stage. The stage itself is the terrain. The things that live or move on it are the entities. In this project there are exactly three kinds: the character (you), artifacts (things worth points), and enemies (things that cost you points if you run into them). None of them are complex — together they are only three small classes — but how they are built matters more than what they contain.</p></div><div class="steps-wrap"><h3>How one entity is built</h3><ol class="steps"><li>You call the class with its data, for example Artifact(&quot;relic&quot;, position, 50).</li><li>Before doing anything else, it builds the canonical ArtifactDefinition from src.api, handing over your inputs.</li><li>That definition validates everything: the id must be a nonempty, already-trimmed string; the position must be a real Position (two integers); the value must be an integer that is zero or positive.</li><li>If any check fails, the class raises an error right there — the object is never created, and nothing is stored.</li><li>Only if everything passes does the object save the values and expose them as read-only properties: artifact_id, position, and value.</li></ol></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Imagine a toll booth at the entrance to a game. You hand over your ticket and your money. The attendant checks both: the ticket must be real and nonempty, the money must be a genuine number and not negative. If you hand over a ticket that is blank, or money that is -5, you are turned away at the door — you do not get in with a quietly &quot;fixed&quot; ticket. That is exactly what these classes do. They are strict border guards, not helpful friends who smooth over your mistakes.</p></div><div class="list-wrap"><h3>The three entities at a glance</h3><ul class="tick"><li>Character(agent_id) — holds only your player id, an identifier string. Exposes agent_id.</li><li>Artifact(artifact_id, position, value) — holds an id, a spot on the grid, and a point value that must be zero or positive. Exposes artifact_id, position, value.</li><li>Enemy(enemy_id, position, encounter_penalty) — holds an id, a spot, and a penalty that likewise must be zero or positive. Exposes enemy_id, position, encounter_penalty.</li><li>Note: enemies have no health and no attack. They are not fighters here — they are just a cost you pay for stepping on the wrong tile.</li></ul></div><div class="prose"><h3>Why &#x27;canonical&#x27; matters</h3><p>Each student class is deliberately thin. It does almost no thinking itself — it delegates to a shared definition in src.api. That is the point. If the game ever grows and needs a new rule (say, ids must be under twenty characters), you change it in one place, and every entity that uses it picks up the rule automatically. One source of truth beats three slightly different copies of the same idea. This is a classic defensive design: fewer places for rules to drift apart.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">Misconception: bad input should be fixed, not rejected</div><p>A natural instinct is: if someone passes a negative artifact value, just clamp it to 0 and move on. This project deliberately does the opposite. Silently clamping hides the bug — the code keeps running, but with data that does not match what the caller meant. Rejecting it loudly makes the mistake visible the instant it happens, while the cause is still right in front of you. In a codebase you have to defend, loud and early beats quiet and wrong.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">The defensive takeaway</div><p>The entities are the whole world&#x27;s data, and every one of them is immutable — read-only after creation — and validated at the front door. That combination means two things for you as a defender: bad data cannot sneak into the game, and once data is in, nothing can quietly change it later. If you are ever asked why the code feels rigid, this is the reason: rigidity here is a feature, not a bug.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>When you create an Artifact with value -5, what happens, and why is that better than changing the value to 0?</p></div><div class="check"><span class="qmark">?</span><p>Why is every property read-only? What could go wrong if it could be changed after creation?</p></div><div class="check"><span class="qmark">?</span><p>What does &quot;canonical definition&quot; mean, and why does having one shared copy matter across the whole project?</p></div><div class="check"><span class="qmark">?</span><p>Do enemies have health or attack? What do they actually carry instead?</p></div></div></div>
     </section>
 
-    <!-- =============== 04 TERRAIN =============== -->
     <section id="terrain">
       <h2><span class="num">04</span>Terrain generation</h2>
-      <div class="prose">
-        <p><code>terrain_generator</code> is the heart of the procedural world-building. It takes a <em>terrain spec</em> (rows, columns, a range of open tiles, a topology) plus a <em>seed</em>, and returns a grid. Three ideas make it work:</p>
-      </div>
-      <div class="card"><h3>1. Seeded randomness → determinism</h3>
-        <p class="muted">The generator creates its own <code>random.Random(seed)</code> and drives <em>everything</em> from it. Same spec + same seed ⇒ the exact same grid, every time, on any machine. This is the contract the referee tests hardest.</p></div>
-      <div class="card"><h3>2. Topology ⇒ a shape recipe</h3>
-        <p class="muted">Each topology is a different growth strategy. The generator doesn't scatter random floor tiles — it follows a shape rule:</p>
-        <ul>
-          <li><span class="badge b-straight">straight</span> one continuous line of floor along a single axis.</li>
-          <li><span class="badge b-bent">bent</span> an L-shape — a horizontal arm plus a vertical arm meeting at a corner.</li>
-          <li><span class="badge b-tree">branching tree</span> a connected, <em>acyclic</em> layout that forks (some cells have 3+ neighbours).</li>
-          <li><span class="badge b-general">general</span> a connected shape with no shape constraint — may even contain loops.</li>
-        </ul></div>
-      <div class="card"><h3>3. Growth rules guarantee connectivity</h3>
-        <p class="muted">For tree and general topologies, growth starts from one random cell and expands a frontier. The trick that prevents accidental cycles in trees: a new cell may touch <strong>exactly one</strong> already-open neighbour. Touching two would create a loop — which breaks the "tree" shape. Loop until the open-tile count hits the target, and reject mediocre attempts until the shape really branches.</p></div>
-      <div class="grid2">
-        <div class="card"><div class="kicker">Constraints</div><h3>Open-tile bounds</h3><p class="muted">The spec gives <code>min_open_tiles</code> and <code>max_open_tiles</code>. The generator picks a target inside that range (randomly, seeded) and builds exactly that many floor cells. Too few and the level is trivial; too many and shapes break.</p></div>
-        <div class="card"><div class="kicker">Why a range?</div><h3>Grading needs variety</h3><p class="muted">A fixed count would make every run identical-ish. The range, combined with seeds, lets the referee generate a whole <em>family</em> of valid worlds from one specification — and every one must be solvable.</p></div>
-      </div>
-      <p>Try it yourself in the <a href="#playground">terrain playground</a> below: watch how the same seed always redraws the same map, and how the topology changes the shape.</p>
+      <p class="lesson-hero">One number and one shape rule in; the same floor-and-wall map out, every single time.</p>
+      <div class="prose"><p>Every level in this project has a map: a grid of floor tiles you can walk on and wall tiles you can&#x27;t. Somebody builds that map, and that somebody is a small piece of code called the terrain generator. You&#x27;ll learn that what looks like &quot;random terrain&quot; isn&#x27;t really random — it&#x27;s driven by a number called a seed, so the exact same map can be made again and again. By the end you&#x27;ll be able to explain the four map shapes the generator can make, say what &quot;connected&quot; means and why every map guarantees it, and answer a reviewer who asks how one run could ever match another.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Seed</div><p class="muted">A number you give the generator; it decides which terrain comes out.</p><details><summary>Deeper</summary><div class="body">Same seed always yields the same map, even across two completely separate runs of the program.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Pseudorandom generator</div><p class="muted">A machine that makes numbers that seem random but are actually strung together from the seed, so they&#x27;re repeatable.</p><details><summary>Deeper</summary><div class="body">random.Random(seed) is built fresh inside the method on every call, so nothing random is remembered between calls.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Topology</div><p class="muted">The shape rule for a level — the pattern the floor must follow.</p><details><summary>Deeper</summary><div class="body">Chosen from four presets; swapping it changes the whole feel of a level.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Connected</div><p class="muted">All floor tiles link up, so you can walk from any one to any other without touching a wall.</p><details><summary>Deeper</summary><div class="body">Even the loosest topology guarantees this — there&#x27;s never a floating island of floor.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Tree and branch</div><p class="muted">A shape with no loops — every floor tile reaches the rest of the map in exactly one way, so there&#x27;s a single path to follow.</p><details><summary>Deeper</summary><div class="body">A branch is a tile with three or more floor neighbors; branching trees must contain at least one.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Deterministic</div><p class="muted">Same inputs always give the same output. No surprises.</p><details><summary>Deeper</summary><div class="body">That&#x27;s what lets a level be replayed and scored fairly.</div></details></div></div>
+      <div class="prose"><h3>The stage: a grid of floor and wall</h3><p>The world is a rectangle divided into cells. Each cell is one of two things: floor, written as &quot;.&quot;, or wall, written as &quot;#&quot;. Floor is where the player walks; wall stops them. A terrain is just the full set of rows, each row a string of dots and hashes. Generating terrain means deciding, for every cell, whether it becomes floor or wall.</p></div><div class="steps-wrap"><h3>How a terrain is generated</h3><ol class="steps"><li>Read the spec: how many rows and columns, the allowed range of floor tiles, and the shape rule (topology).</li><li>Make the random generator from the seed: rng = random.Random(seed). This is the only place the seed is used, and it is rebuilt on every call.</li><li>Pick how many floor tiles to carve — the target — choosing within the allowed min/max range using that generator.</li><li>Hand the shape rule the generator, the grid size, and the target. It chooses which cells become floor.</li><li>Paint the grid: start with all walls, mark the chosen cells as floor, and return the finished rows.</li></ol></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>A seed works like agreeing on the exact order a deck is shuffled. In real life, ten people can&#x27;t shuffle &quot;the same way&quot; — but here they can. Give the generator the seed 42, and it always deals the same terrain. Change it to 43, and you get a different but still repeatable map. The randomness is fake on purpose: it&#x27;s a fixed recipe, and the seed is the one ingredient you may change.</p></div><div class="list-wrap"><h3>The four shapes (topologies)</h3><ul class="tick"><li>STRAIGHT_PATH: a single corridor of floor running along one axis — horizontally if the board is wide enough, otherwise vertically. One line.</li><li>BENT_PATH: an L-shape. A horizontal arm meets a vertical arm at a corner, and the total floor cells equal the target.</li><li>BRANCHING_TREE: a shape with no loops, like a family tree drawn on the grid; it must contain at least one cell where three or more arms meet (a branch). It&#x27;s built by adding cells that touch exactly one existing floor neighbor, so no loop can form.</li><li>GENERAL: any connected shape. The only rule is everything links up.</li></ul></div><div class="callout"><div class="sym">!</div><div class="cttl">Why determinism is the whole point</div><p>Because rng is built fresh from the seed inside the method, two brand-new generators with the same seed and spec cannot disagree. That&#x27;s what makes a level fair to grade and safe to replay: you, or a referee, can recompute the exact same map later. If the generator had kept hidden random state on itself instead, a second run might quietly differ — a nasty class of bug the AI writer avoided by keeping state local.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 misconception</div><p>&quot;It uses random, so nobody can reproduce the map.&quot; Wrong. The &quot;random&quot; is seeded, so it&#x27;s fully repeatable. Randomness here doesn&#x27;t mean unpredictable — it means varied-but-identical-for-the-same-seed. If a reviewer says this can&#x27;t be tested because it&#x27;s random, that&#x27;s the exact misunderstanding to correct.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Branching trees get retried</div><p>Branching trees rarely come out right on the first try. The generator grows a candidate tree once, checks whether it hit the target floor count and has a branch, and if not, throws it away and grows a fresh one — using the same seeded generator each time, so even the retries are reproducible. The number of tries is capped, so it can&#x27;t loop forever.</p></div><div class="prose"><h3>Reading the output</h3><p>End to end, you get back a Terrain object whose rows are strings of &#x27;.&#x27; and &#x27;#&#x27;. That&#x27;s the whole contract. Given the same seed and spec, those strings will be character-for-character identical every time. That&#x27;s the guarantee you can point at when someone asks why a level can be rerun.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Two separate TerrainGenerator objects are created with the same seed and spec. Will they produce the same terrain, and why?</p></div><div class="check"><span class="qmark">?</span><p>What is the difference between what STRAIGHT_PATH and BENT_PATH output?</p></div><div class="check"><span class="qmark">?</span><p>Why does a branching tree get rebuilt repeatedly until its conditions are met, and why is that still reproducible?</p></div><div class="check"><span class="qmark">?</span><p>What does &quot;connected&quot; guarantee for a map, and which topology is the loosest?</p></div></div></div>
     </section>
 
-    <!-- =============== 05 LEVEL =============== -->
     <section id="level">
       <h2><span class="num">05</span>Level generation</h2>
-      <div class="prose">
-        <p><code>level_generator</code> decorates the terrain into a full, playable level: it chooses the start and exit, then places artifacts and enemies. Its job is to make levels that are <em class="hl">legal and fair</em> — never accidentally unwinnable.</p>
-      </div>
-      <div class="grid2">
-        <div class="card"><div class="kicker">Endpoints</div><h3>Start &amp; exit</h3><p class="muted">For straight/bent paths, the two natural ends of the path are chosen as start and exit (the cells with only one open neighbour). For trees and general maps, start is a top-left open tile and exit is picked so the route distance fits the spec's <code>min/max_route_moves</code>.</p></div>
-        <div class="card"><div class="kicker">Placement</div><h3>Entities</h3><p class="muted">Artifacts and enemies go on traversable tiles. By default: never on the start or exit (unless explicitly allowed), and never overlapped (unless allowed). Values and penalties are rolled inside their allowed ranges, and every entity gets a unique id.</p></div>
-      </div>
-      <div class="callout danger">
-        <div class="cttl">Why block endpoints?</div>
-        <p>If an enemy sat on the <strong>start</strong>, the explorer would be born on top of a blocker — instantly unfair. If one sat on the <strong>exit</strong>, the finishing move could become unclear. Keeping ends clear is a fairness guarantee, and it's exactly the kind of rule a reviewer will probe.</p>
-      </div>
+      <p class="lesson-hero">Your map doesn&#x27;t draw itself — and knowing who draws it is half the defense.</p>
+      <div class="prose"><p>A video game level is a little world: some walkable floor, a place you start, a place you leave, and things you grab or avoid. Building that by hand is fine for one map, but this project creates many levels from a small description. That job belongs to a piece of code called LevelGenerator. By the end of this section you can explain how it works: how it gets the terrain, how it chooses where you start and exit, and how it decides where artifacts and enemies sit. You will also see the invisible rules that keep every generated level fair and legal.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Contract (TerrainGeneratorContract)</div><p class="muted">A promise between two pieces of code: anything that supplies me terrain must answer these calls, and LevelGenerator expects exactly that without caring who the builder is.</p><details><summary>Deeper</summary><div class="body">Because LevelGenerator never makes terrain itself, swapping one builder for another changes the map style without touching the rest of the code.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Degree-one cell</div><p class="muted">An open, walkable tile that touches only one other open tile — in other words, a dead end or the tip of a corridor.</p><details><summary>Deeper</summary><div class="body">For straight and bent corridors, a path has exactly two such tips, so those become the start and exit.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Manhattan distance</div><p class="muted">The number of steps from one tile to another if you can only move up, down, left, or right — no diagonal shortcuts.</p><details><summary>Deeper</summary><div class="body">It is the route length on a grid, and the code uses it so start and exit are neither too close nor too far apart.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Seeded random number generator</div><p class="muted">A random number machine you can rewind: give it the same seed (a starting number) and it produces the exact same sequence of random choices every time.</p><details><summary>Deeper</summary><div class="body">That is why the same seed always rebuilds the identical level — the key to reproducing and testing a bug.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Traversable tile</div><p class="muted">A floor tile you can stand on, as opposed to a wall tile you cannot.</p><details><summary>Deeper</summary><div class="body">Entities are never placed on walls, because they could not be reached.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Endpoints</div><p class="muted">The start and exit tiles of a level.</p><details><summary>Deeper</summary><div class="body">Different map shapes pick these differently, which is the part worth watching.</div></details></div></div>
+      <div class="prose"><h3>What level generation really is</h3><p>Building a level is assembly, not invention. LevelGenerator takes a specification (a written description of what the level should contain) and a seed, then runs three phases: get the terrain, choose start and exit, and sprinkle in the artifacts and enemies. Each phase follows fixed rules, and those rules are the whole point of this reading: a reviewer will ask you why a level looks the way it does, and the answer lives in these rules.</p></div><div class="prose"><h3>The terrain is borrowed, not built</h3><p>First, the terrain. LevelGenerator does not draw the map. It is given a terrain generator at startup through a thing called a contract — a promise that whatever generator is handed over can produce terrain, This is called dependency injection: the code that needs a service receives it from outside instead of building it itself. So the layout comes from somewhere else, and LevelGenerator just asks for it.</p></div><div class="steps-wrap"><h3>The pipeline, step by step</h3><ol class="steps"><li>Trust the terrain: call the injected generator to build the map, returning walkable (&#x27;open&#x27;) and blocked tiles.</li><li>Collect open tiles: scan every tile and keep the ones you can stand on.</li><li>Pick endpoints: choose start and exit using the shape of the terrain.</li><li>Place entities: drop artifacts and enemies onto open tiles under the fairness rules.</li><li>Ship the level: bundle seed, terrain, start, exit, artifacts, and enemies into a finished LevelDefinition.</li></ol></div><div class="prose"><h3>How start and exit get chosen</h3><p>How endpoints get picked depends on the map&#x27;s shape. For straight or bent corridors, a path has exactly two dead ends — tiles with only one neighbor, called degree-one cells. Those become start and exit. For trees and general open maps, the start is simply the top-left open tile, and the exit is the first other tile whose Manhattan distance (step count) falls inside the requested minimum and maximum route moves. If nothing qualifies, it falls back to the last open tile. Every case bounds the route length, which keeps the level playable instead of absurdly short or long.</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Think of a restaurant that cannot cook. It does not grow its own food; it orders from a supplier who promises delivery. The supplier may change, but the restaurant&#x27;s orders stay the same. LevelGenerator is the restaurant. The terrain generator is the supplier. The contract is the delivery promise — as long as the supplier honors it, LevelGenerator never needs to know how the food (or the map) was made.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 wrong idea</div><p>The biggest misconception: &#x27;The level generator designs the whole map itself.&#x27; It does not. It borrows the terrain from an injected builder. Its own work is picking endpoints and placing entities. Confusing those two jobs leads you to look for layout logic in the wrong file — and to miss the boundary where bugs and exploits tend to hide.</p></div><div class="list-wrap"><h3>Where entities may go</h3><ul class="tick"><li>Entities only go on open, walkable tiles — never on walls.</li><li>Enemies are never placed on the start tile; that would be unfair.</li><li>Unless allowed, both artifacts and enemies also avoid the exit tile.</li><li>Unless overlapping is allowed, no two entities share a tile.</li><li>Each entity gets a unique id — ART-1, ENM-2 — so the game can tell them apart.</li><li>Artifact values and enemy penalties are rolled from the specification&#x27;s range using the seeded random numbers, so they vary but stay within bounds.</li></ul></div><div class="callout"><div class="sym">!</div><div class="cttl">Why these rules matter</div><p>These rules are guards, not decoration. They guarantee a level is always beatable and fair no matter what the random numbers say. When you defend an AI-written project, this is the exact spot to check: did the writer put limits on randomness? Can an enemy land on the start, or an artifact on the wall? These invariants are the backbone of a trustworthy generator.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Who actually builds the terrain, and how does LevelGenerator get hold of that builder?</p></div><div class="check"><span class="qmark">?</span><p>For a straight corridor, how does the code decide which tiles become the start and exit?</p></div><div class="check"><span class="qmark">?</span><p>The code forbids enemies on the start tile. Where does that rule live, and how is it enforced?</p></div><div class="check"><span class="qmark">?</span><p>If you generate the same challenge with the same seed twice, will you get the same level? Explain why.</p></div></div></div>
     </section>
 
-    <!-- =============== 06 CONTROLLER =============== -->
     <section id="controller">
       <h2><span class="num">06</span>The controller</h2>
-      <div class="prose">
-        <p>The controller is a loop. Each turn it receives a fresh <em>snapshot</em> and must answer: <strong>what's the one action I take now?</strong> Seven actions exist:</p>
-      </div>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Action</th><th>Meaning</th><th>Gotcha</th></tr></thead>
-        <tbody>
-          <tr><td>MOVE_NORTH / SOUTH / WEST / EAST</td><td>Step one cell in a cardinal direction.</td><td>Only legal onto floor that isn't currently occupied.</td></tr>
-          <tr><td>COLLECT</td><td>Grab an uncollected artifact on your current tile.</td><td>Must name the artifact; only works when standing on it.</td></tr>
-          <tr><td>ENGAGE</td><td>Clear an adjacent <em>static</em> enemy.</td><td>You don't move; you pay the penalty; the enemy is removed.</td></tr>
-          <tr><td>WAIT</td><td>Pass the turn (when allowed).</td><td>Still advances the patrol clock — never "free".</td></tr>
-          <tr><td>EXIT</td><td>Leave the world.</td><td>Only valid while standing on the exit tile. Arriving isn't enough — you must EXIT.</td></tr>
-        </tbody>
-      </table></div>
-      <div class="card"><h3>Pathfinding: from greedy to planned</h3>
-        <p class="muted">The first naive controller "always walked toward the exit." That works on a wide-open straight corridor — and fails everywhere else.</p>
-        <p class="muted"><strong>The bug:</strong> if the first step <em>away</em> from the exit is a wall, a greedy controller is stuck and — because WAIT is allowed — it just waits forever. That's the <span class="term">WAIT-lock</span>.</p>
-        <p class="muted"><strong>The fix:</strong> plan a real route with <em>graph search</em>. A shortest-path search (BFS) explores from the current position toward the exit over floor cells. The final version goes further and uses a <em>lowest-cost</em> search that weighs actions <strong>and</strong> encounter penalties — so it can choose to go around an expensive enemy if the detour is cheaper overall.</p></div>
-      <div class="callout">
-        <div class="cttl">The decision order each turn</div>
-        <ol>
-          <li>On the exit? → <code>EXIT</code>.</li>
-          <li>Uncollected artifact under you? → <code>COLLECT</code> (if safe).</li>
-          <li>Follow the planned route. Next step has a static enemy? → <code>ENGAGE</code> it.</li>
-          <li>Otherwise → move. No route? → <code>WAIT</code>.</li>
-        </ol>
-      </div>
+      <p class="lesson-hero">The controller is the robot&#x27;s brain: each turn it reads the world and picks exactly one move.</p>
+      <div class="prose"><p>Every turn of the game, the world changes around the agent, and someone has to decide what it does next. That someone is the controller: a block of code that runs once per turn, looks at the current state (where the agent is, what it has, where the enemies are), and returns exactly one action. By the end of this section you&#x27;ll be able to explain the controller&#x27;s decision order in your own words, say why standing on something is never enough on its own, and answer a reviewer who asks why the controller behaves the way it does.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Action</div><p class="muted">One thing the agent can do on its turn: move north, south, west, or east, collect an artifact, engage an enemy, wait, or exit.</p><details><summary>Deeper</summary><div class="body">The controller MUST return exactly one action every turn, even if the right choice is to do nothing (that&#x27;s the WAIT action).</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Turn</div><p class="muted">A single step of the game, where the controller reads the world and answers with one action.</p><details><summary>Deeper</summary><div class="body">Every accepted action advances the patrol clock by one turn, so the world shifts even when the agent stands still.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Patrol</div><p class="muted">An enemy that walks a fixed loop on a schedule, so its next position is predictable.</p><details><summary>Deeper</summary><div class="body">The planner never fights patrols; it times around them.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Artifact</div><p class="muted">An item sitting on a tile that the agent must stand on and actively collect.</p><details><summary>Deeper</summary><div class="body">Just standing on an artifact does nothing, you must return the COLLECT action.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Plan</div><p class="muted">A precomputed list of steps from the agent&#x27;s current spot to the exit, chosen as the lowest-cost path.</p><details><summary>Deeper</summary><div class="body">The plan is recomputed each turn, and only its first step is used.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Exit tile</div><p class="muted">The goal square. Reaching it wins the level only if the controller also returns the EXIT action.</p><details><summary>Deeper</summary><div class="body">Arrival is not the same as leaving.</div></details></div></div>
+      <div class="prose"><h3>What the controller is</h3><p>The controller is the decision-maker. It does not move the agent itself; it only chooses. Each call to choose_action(state, agent_id) reads the current world and returns one action. The game then applies that action and advances to the next turn. Nothing else decides for the agent, this one function is the whole brain.</p></div><div class="steps-wrap"><h3>The decision order</h3><ol class="steps"><li>If the agent is standing on the exit tile, return EXIT.</li><li>Else, if an uncollected artifact is on the agent&#x27;s own tile and no patrol will arrive there next turn, return COLLECT.</li><li>Else, follow the plan: return the first step of the lowest-cost path toward the exit.</li><li>If there is no usable plan, return WAIT.</li></ol></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Think of the controller as a taxi driver at an intersection. The driver doesn&#x27;t decide the whole ride upfront every second; they look at what&#x27;s ahead right now and make one call, turn left, wait, merge. When the light changes, they re-look. The controller works the same way: every turn it looks fresh and picks the single best next move, so it can react to patrols moving and meters getting collected.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Arriving is not leaving</div><p>This is the sharpest edge in the whole file. Walking onto the exit tile does not end the level. The code checks, if position == state.level.exit, return EXIT. Reaching the tile is only half; the controller must actively return the EXIT action to win. The same idea applies to artifacts: standing on one never collects it, the controller has to choose COLLECT.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The biggest wrong idea</div><p>Many people assume that stepping onto an exit or an artifact automatically triggers it, like a checkpoint in a platformer. It does not. In this project, moving onto a tile and acting on it are separate decisions, and the controller must explicitly commit the EXIT or COLLECT action. If you review the code and see the agent standing on the exit but the loop not ending, that is almost always the controller returning the wrong action instead of EXIT.</p></div><div class="prose"><h3>Why the checks are ordered</h3><p>Order matters. The exit check runs first, so the agent always leaves the moment it can. The collect check runs second and is guarded: it only collects if no patrol is about to arrive on that tile, because collecting costs one turn and a patrol landing on you is a collision. Only after those quick checks does the controller fall back to the slow pathfinding plan, and if even that has no route, it waits rather than guess.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Why must the controller return EXIT only when standing on the exit tile, and never earlier?</p></div><div class="check"><span class="qmark">?</span><p>What condition must be true before the controller collects an artifact, and why?</p></div><div class="check"><span class="qmark">?</span><p>If there is no plan, the controller returns WAIT. Why is waiting better than guessing a move?</p></div><div class="check"><span class="qmark">?</span><p>How many actions does choose_action return per turn, and why does that constraint matter?</p></div></div></div>
     </section>
 
-    <!-- =============== 07 ENEMIES =============== -->
+    <section id="planning">
+      <h2><span class="num">07</span>How the controller plans</h2>
+      <p class="lesson-hero">It doesn&#x27;t guess. It maps every route, prices them, and walks the cheapest one.</p>
+      <div class="prose"><p>A controller that just &quot;heads toward the exit&quot; is a dead end. In one map I looked at, the first step away from the exit is a wall, so that controller has no legal move - and when it&#x27;s allowed to do nothing, it just waits forever. That&#x27;s a bug you want to catch. The real planner thinks ahead. It searches over every reachable state, prices each route by how many actions it costs, and picks the cheapest one. By the end of this section you&#x27;ll be able to explain that search, why the turn number is part of each state, and why a longer detour can beat a straight path.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">State</div><p class="muted">A snapshot of where you are: your position on the grid, the current turn, and which enemies are already defeated. Two states are different if any of those three things differ.</p><details><summary>Deeper</summary><div class="body">This is the trickiest part: the same tile at turn 5 and turn 12 is a different state, because the floor plans move with the clock.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Cost</div><p class="muted">How expensive a route is in actions. A normal move or WAIT costs 1; engaging an enemy costs 1 plus its encounter penalty.</p><details><summary>Deeper</summary><div class="body">The planner compares these numbers, not the number of tiles. A detour of 6 actions beats a straight path through an enemy that costs 13.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Dijkstra&#x27;s algorithm</div><p class="muted">A way to explore routes in order of cost, cheapest first. Because it always explores the cheapest known route next, the first time it reaches a state, that route is the cheapest way to get there.</p><details><summary>Deeper</summary><div class="body">It uses a priority queue (a heap) so it can grab the cheapest not-yet-explored route each loop. As soon as it reaches the exit, it stops and walks the path backward.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Patrol clock</div><p class="muted">Patrols move once per accepted action, so their future position depends on how many turns have passed. Planning against their future spots - not just where they are now - is why the turn is in the state.</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Encounter penalty</div><p class="muted">An extra cost charged for fighting a static enemy, set per enemy in the level. It&#x27;s what makes the planner weigh fighting vs. going around.</p><details><summary>Deeper</summary><div class="body">Patrols can&#x27;t be fought at all - they&#x27;re only timed around. Only static, undefeated enemies are clearable blockers.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">The WAIT-lock bug</div><p class="muted">What happens to a naive controller with no legal move: since waiting is allowed, it just waits forever instead of recovering. The planner avoids this by always having a whole route computed before moving.</p><details><summary>Deeper</summary><div class="body">If the planner can&#x27;t reach the exit at all, it returns no plan and the controller falls back to waiting - but that&#x27;s a last resort, not its normal behavior.</div></details></div></div>
+      <div class="prose"><h3>Where a dumb controller dies</h3><p>Start with the version you&#x27;d write in five minutes: always move one step toward the exit. It works until the step right next to the exit is a wall. Now it has no legal move - and since WAIT is allowed, it just stands there forever. That&#x27;s the WAIT-lock bug. It&#x27;s not a clever failure; it&#x27;s a controller that never looked more than one step ahead.</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Picture the map as a road network. Each tile is an intersection, each corridor is a road, and every road has a toll. Moving costs 1, and walking into a battle is an expensive toll booth. Pit plans the whole trip ahead of time: load all the routes it can reach, add up the tolls, and commit to the cheapest one. A detour that costs 6 beats a &#x27;straight&#x27; road that runs through a 13-toll battle, every time.</p></div><div class="steps-wrap"><h3>How the search works</h3><ol class="steps"><li>Start with one state: your current position, your current turn, and the set of enemies already defeated.</li><li>Repeatedly pop the cheapest not-yet-explored state off a priority queue (a heap).</li><li>From it, consider every move: north/south/east/west (cost 1), ENGAGE an adjacent static enemy (cost 1 plus that enemy&#x27;s penalty), or WAIT (cost 1).</li><li>Each move produces a new state - position changed, turn bumped by one, enemies defeated grown - and you record the cheapest cost found to reach it.</li><li>Because you always explore cheapest first, the first time you reach the exit tile, the route you found is the cheapest one. Stop there.</li><li>Walk the recorded &#x27;previous&#x27; pointers backward from the exit to the start, then reverse them to get the ordered list of actions.</li></ol></div><div class="callout"><div class="sym">!</div><div class="cttl">Why the turn is part of a state</div><p>Patrols move with the clock: their position is computed from the schedule, the turn, and their start phase. The same tile at a different turn is a different state, so the planner must consider where patrols will be in the future, not just now. A route is only legal if the next tile is clear now and stays clear right after the move advances the clock - the code checks both the current and the next-turn patrol positions.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Fighting is priced, not free</div><p>Engaging a static enemy costs one action plus its encounter penalty. That penalty is the whole point: it makes the planner decide between clearing a blocker or going around it. Patrols are never engaged - only timed around. So the route you get reflects a real trade-off, not a fixed path.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">Misconception: shortest means fewest tiles</div><p>The common wrong idea is that the planner minimizes the number of tiles traveled. It doesn&#x27;t. It minimizes total cost: actions plus encounter penalties. That&#x27;s why a detour of 6 actions is chosen over a path through an enemy that costs 13. If you read this code and think it&#x27;s &#x27;just pathfinding,&#x27; you&#x27;ll miss the whole reason the cost function exists.</p></div><div class="prose"><h3>When the exit is unreachable</h3><p>If no route to the exit exists, the search ends with no goal and returns no plan. The controller then falls back to WAIT - which is where the WAIT-lock bug lives, but now as a deliberate last resort rather than an accident. It&#x27;s the difference between a controller that has no option and one that has no plan.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Why does a greedy &#x27;move toward the exit&#x27; controller lock up, and what action does it fall back on?</p></div><div class="check"><span class="qmark">?</span><p>What three things make up a state in this search, and why is the turn one of them?</p></div><div class="check"><span class="qmark">?</span><p>Why might the planner choose a 6-action detour over a straight path through an enemy?</p></div><div class="check"><span class="qmark">?</span><p>What happens when the planner finds no route to the exit - and how is that different from the WAIT-lock bug?</p></div></div></div>
+    </section>
     <section id="enemies">
-      <h2><span class="num">07</span>Enemies &amp; patrols</h2>
-      <div class="prose">
-        <p>There are two kinds of obstacles, and they behave completely differently. Getting this distinction right is the most important thing to be able to defend.</p>
-      </div>
-      <div class="grid2">
+      <h2><span class="num">08</span>Enemies &amp; patrols</h2>
+      <p class="lesson-hero">You can&#x27;t fight a patrol. You read its route, time your move, and thread through.</p>
+      <div class="prose"><p>This world has two kinds of enemy, and they punish you differently. A static enemy sits on one cell and never moves. You clear it by paying a toll. A patrol walks a fixed route in a loop, forever. You can&#x27;t fight it, you can only predict where it&#x27;ll be and slip past. By the end of this lesson you&#x27;ll know exactly how patrols move, what ENGAGE actually does, and the one rule that decides whether you survive a crossing.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Static enemy</div><p class="muted">A blocker that stands on one cell and never moves. You clear it with ENGAGE while standing on a neighboring cell.</p></div></div>
+            <div class="grid2">
         <div class="card"><div class="kicker"><span class="badge b-static">static</span> Blockers</div><h3>Cleared with ENGAGE</h3><p class="muted">A static enemy sits still on one tile. If it's adjacent, you can <code>ENGAGE</code> it: it disappears, you pay its penalty, and <em>you don't move</em>. Next turn you step into the cleared tile. Once defeated, it's in <code>defeated_enemy_ids</code> and won't be re-engaged.</p></div>
         <div class="card"><div class="kicker"><span class="badge b-patrol">patrol</span> Moving guards</div><h3>Cannot be engaged</h3><p class="muted">A patrol follows a repeating schedule of positions (<code>positions</code> plus an <code>initial_phase</code>). It advances <strong>once per accepted action</strong> — including yours. You may <em>not</em> ENGAGE it. The only winning move is timing: move into cells it isn't about to occupy.</p></div>
       </div>
@@ -453,107 +592,49 @@ footer{border-top:1px solid var(--line); padding:28px 0 64px; color:var(--fg2); 
           <p>Rejected moves don't advance the clock — but WAIT, COLLECT, and ENGAGE all count as accepted actions and <em>do</em>. That's why a controller can't just "wait forever" in a patrol world: waiting moves the guards.</p>
         </div></div>
       <div class="callout">
-        <div class="cttl">No combat, no killing</div>
+        <div class="sym">!</div><div class="cttl">No combat, no killing</div>
         <p>ENGAGE is <strong>not</strong> a fight mechanic. Enemies have no health, no attacks. ENGAGE is simply <em>clearing a blocker and paying its penalty</em>. A reviewer will press you on this — be able to say it plainly.</p>
       </div>
+
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Why must you check where a patrol will be after your move?</p></div></div></div>
     </section>
 
-    <!-- =============== 08 SCORING =============== -->
     <section id="scoring">
-      <h2><span class="num">08</span>Scoring &amp; limits</h2>
-      <div class="prose">
-        <p>Grading isn't "did it reach the exit." It's a cost model that rewards efficiency. Understanding the terms lets you reason about why one route beats another.</p>
-      </div>
-      <div class="tablewrap"><table>
-        <thead><tr><th>Metric</th><th>What it is</th></tr></thead>
-        <tbody>
-          <tr><td><code>T</code></td><td>Actions taken (moves, COLLECT, ENGAGE, WAIT, EXIT). Rejected intents don't count.</td></tr>
-          <tr><td><code>P</code></td><td>Encounter cost — total penalties from successful ENGAGEs.</td></tr>
-          <tr><td><code>C</code></td><td>Total cost = <code>T</code> + <code>P</code>. This is what you're really minimizing.</td></tr>
-          <tr><td><code>L</code></td><td>Reference cost without any collection — a validated baseline for the level.</td></tr>
-          <tr><td><code>E</code></td><td>Excess cost = <code>max(0, C − L)</code>.</td></tr>
-          <tr><td><code>B, r</code></td><td>Base completion points, and points deducted per unit of excess cost.</td></tr>
-          <tr><td><code>Q</code></td><td>A threshold: cross it and the run scores zero (it's a cost budget, not a hard stop).</td></tr>
-          <tr><td><code>D</code></td><td>Patrol deadline — a turn count the patrol worlds must finish within (EXIT is allowed up to the action limit).</td></tr>
-        </tbody>
-      </table></div>
-      <div class="card"><h3>Reading a score</h3>
-        <p class="muted">A completed run starts at base points <code>B</code> and loses <code>r</code> points per unit of excess cost <code>E</code>. If excess crosses <code>Q</code>, or the run never completes, score is zero. So the "cheapest" path (fewest actions + smallest penalties) is the best path.</p>
-        <p class="muted" style="margin-top:8px"><strong>Worked intuition:</strong> on a level where the direct route needs one ENGAGE (cost 10) but a longer loop avoids the enemy (cost 9), the longer loop scores higher — even though it takes more moves. That's exactly why the controller optimizes <em>cost</em>, not distance.</p></div>
-      <div class="callout">
-        <div class="cttl">Limits are separate from scoring</div>
-        <p>There's an action limit <code>H</code> (max turns) and a patrol deadline <code>D</code>. They stop a run; they don't by themselves decide the score. Know the difference: a time limit ends you, a cost budget taxes you.</p>
-      </div>
+      <h2><span class="num">09</span>Scoring &amp; limits</h2>
+      <p class="lesson-hero">Your score isn&#x27;t about finishing — it&#x27;s about how close you stayed to the cheapest honest route.</p>
+      <div class="prose"><p>When you run an adventure level, the game turns your choices into a single number: your score. This section shows you exactly how that number is computed, and why the details matter when you have to defend an AI-written project. By the end, you&#x27;ll be able to compute a score by hand from a run&#x27;s events, explain what the reference cost means, and see why &quot;just finish&quot; is the wrong strategy. You&#x27;ll also meet the two hard limits, H and D, that keep a run finite. Everything here is read from the real code, not invented.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Action (turn)</div><p class="muted">One decision you make for the explorer — moving to a neighboring tile, waiting, or taking the exit. The code counts every accepted action and calls that number T.</p><details><summary>Deeper</summary><div class="body">The exit move itself counts as a turn, so T is not just walking moves.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Encounter penalty (P)</div><p class="muted">If you step onto a tile holding an enemy, the game charges you a fixed penalty — a number added to your cost. P is the sum of every penalty you paid.</p><details><summary>Deeper</summary><div class="body">Penalties are set when the level is built; larger enemies cost more points.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Total cost (C)</div><p class="muted">Your total cost is your turns plus your penalties: C = T + P. It measures how expensive your chosen route was, in effort plus damage.</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Reference cost (L)</div><p class="muted">The reference cost is the cheapest honest route through the level, computed for you before the run. It is the baseline that &#x27;good&#x27; is measured against.</p><details><summary>Deeper</summary><div class="body">You earn points by staying near L — not by moving fast, and not by collecting the most.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Excess (E)</div><p class="muted">Excess is how far above the reference cost you went: E = max(0, C - L). The max(0, ...) means going under L is not &#x27;negative excess&#x27; — it triggers a separate flag.</p><details><summary>Deeper</summary><div class="body">This is the single number that actually moves your score down.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Base points, deduction rate, threshold (B, r, Q)</div><p class="muted">You start with B base points, lose r points for each unit of excess, and the whole score collapses to zero once excess reaches Q.</p><details><summary>Deeper</summary><div class="body">B, r, and Q come from the tuning() function, which sizes them to the level&#x27;s size: big levels get bigger B and Q, so a &#x27;good&#x27; run is equally hard everywhere.</div></details></div></div>
+      <div class="prose"><h3>What a score really measures</h3><p>Every run ends with a number: the score. In this family, the score is not &#x27;how much you collected&#x27; and not &#x27;how fast you were.&#x27; It is a measure of how close your route came to the cheapest honest route through the level. Grasping that distinction is the whole game — and it is exactly what a reviewer will probe when they look at an AI-written project. If you can reproduce the calculation yourself, you can tell whether a score is fair or whether something in the code is quietly wrong.</p></div><div class="steps-wrap"><h3>The calculation, step by step</h3><ol class="steps"><li>Count every accepted action — each move, wait, and the final exit — and call that T.</li><li>Add every enemy penalty you paid, and call that P.</li><li>Add them: C = T + P. That is your total cost.</li><li>Compare C to the reference cost L. Excess is E = max(0, C - L).</li><li>Start at base points B, add any artifact rewards A, then subtract r points for each unit of excess. That gives your score.</li><li>Force the score to zero if any of these are true: the run never completed, excess reached Q, or you finished under the reference cost (a defect).</li></ol></div><div class="callout"><div class="sym">!</div><div class="cttl">The real numbers</div><p>These are not hypothetical. From the actual code, the simple straight passage (tier 0) ships with B = 100, r = 5, Q = 14, and a 32-turn cap H. The big combined world (tier 7) has B = 975, Q = 230, H = 512. Because tuning() grows B and Q with the level&#x27;s size, a &#x27;good&#x27; run costs about the same effort on every level. A run with C = 13 and L = 5 has E = 8 and scores 100 - 5*8 = 60; a run with C = 6 has E = 1 and scores 95.</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Think of the level as a toll highway. The reference cost L is the price of the cheapest honest route from entrance to exit, and you start with B dollars in your pocket. Every tile you walk costs $1, and stepping on an enemy adds its penalty. The moment your total bill passes L, every extra dollar is taken straight out of your B dollars, r at a time. Run the bill high enough — up to Q — and you are cleaned out: a flat zero.</p></div><div class="prose"><h3>Two things that trip people up</h3><p>First, artifacts are worth points: your reward A is added to the base before deductions, so grabbing a valuable artifact can legitimately cover extra wandering. Second, finishing faster than the reference cost is not a win. The code flags a completed run whose cost is below L as a defect and scores it zero. That is an anti-cheat guard: a real run should not beat the certified cheapest route, so a suspiciously fast finish is treated as invalid.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 misconception</div><p>&#x27;Finishing is what matters — take your time and grab everything.&#x27; Wrong. You are scored on staying near the reference route, not on reaching the exit. Padding your walk with extra turns pushes excess up, and once excess reaches Q the entire score collapses to zero. More time is not more credit; it is slowly spending down your base points.</p></div><div class="prose"><h3>The limits: H and D</h3><p>Two hard stopwatch limits keep runs finite. H is the maximum number of turns you are allowed: hit it without exiting and the run is simply over, incomplete, and scores zero. D is the patrol deadline, used only in the tier-8 patrol worlds, where the patrol schedule is certified against this bound. Both exist so a player cannot stall forever to dodge enemies or wander indefinitely — and so a reviewer can rely on every run being bounded.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>A level has B = 100, r = 5, Q = 14. You finish a 13-turn run with no penalties, and the reference cost is 5. What is your score?</p></div><div class="check"><span class="qmark">?</span><p>Why does the code treat a run that finishes under the reference cost as a defect instead of a great run?</p></div><div class="check"><span class="qmark">?</span><p>Name the three conditions that each force a score of exactly zero.</p></div><div class="check"><span class="qmark">?</span><p>If you had unlimited turns, could you still fail a level? Explain using Q, E, and the zero condition.</p></div></div></div>
     </section>
 
-    <!-- =============== 09 DETERMINISM =============== -->
     <section id="determinism">
-      <h2><span class="num">09</span>Why seeds matter</h2>
-      <div class="prose">
-        <p>Everything in the pipeline is <em class="hl">deterministic</em>: a given seed always yields the same terrain, the same level, and — against a fixed controller — the same outcome. Three reasons this is the backbone of the project:</p>
-      </div>
-      <div class="grid3">
-        <div class="card"><div class="kicker">Fair grading</div><p class="muted">The referee can re-run <em>your</em> code on <em>its</em> worlds and compare against a canonical transcript byte-for-byte. Randomness that "just does something" would make that impossible.</p></div>
-        <div class="card"><div class="kicker">Reproducible bugs</div><p class="muted">If a map is bad, you can rebuild it exactly, look at it, and debug — instead of chasing a dice-rolling generator.</p></div>
-        <div class="card"><div class="kicker">Fresh instances, same answer</div><p class="muted">The referee constructs the generator fresh and re-runs it. Identical inputs must agree <em>across instances</em>, not just within one object. State must live inside the seeded RNG, not leak across runs.</p></div>
-      </div>
-      <div class="callout">
-        <div class="cttl">The practical trap</div>
-        <p>A common bug: storing "the last map" in an instance variable and reusing it. That breaks cross-instance determinism. The rule is simple — <strong>seed the RNG from the seed, use nothing else.</strong></p>
-      </div>
+      <h2><span class="num">10</span>Why seeds matter</h2>
+      <p class="lesson-hero">Same seed, same map — every time, on every machine, for every player. That&#x27;s determinism.</p>
+      <div class="prose"><p>Every map here comes from just two inputs: a specification (the rules — how big, how many open tiles, what shape) and a seed (one integer). This section is about why that seed matters so much. By the end you&#x27;ll be able to explain why the same seed must produce the identical map on every fresh run, how the referee verifies it, and why the tempting shortcut of remembering the last map quietly breaks the whole system.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Seed</div><p class="muted">A seed is a single number (never negative) that acts as the starting point for every &#x27;random&#x27; choice in the generator. Same seed plus same rules equals the same map.</p><details><summary>Deeper</summary><div class="body">In the code, random.Random(seed) builds a private random-number machine from it, and every coin flip the generator makes pulls from that one machine in a fixed order.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Determinism</div><p class="muted">Determinism means identical input always produces identical output — here, the same spec and seed must produce the exact same grid of tiles.</p><details><summary>Deeper</summary><div class="body">It must hold across fresh instances, not just within one object: a brand-new generator with the same spec and seed must draw the same map.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Canonical record</div><p class="muted">A canonical record is a frozen, standardized snapshot of a request or its output, written in one exact format so it can be compared byte for byte.</p><details><summary>Deeper</summary><div class="body">The referee encodes a map&#x27;s geometry as canonical bytes and fingerprints them with a SHA-256 digest, so &#x27;did these two runs match?&#x27; becomes a simple byte comparison.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Referee</div><p class="muted">The referee is the automated judge that runs your generator, checks its output against the rules, and decides pass or fail.</p><details><summary>Deeper</summary><div class="body">To test determinism it runs an A/A/B/A sequence on one object, then repeats request A on a separate fresh instance and insists every copy matches.</div></details></div></div>
+      <div class="prose"><h3>A map from a thousand coin flips</h3><p>This project builds a map — a grid of open floor tiles (&#x27;.&#x27;) and walls (&#x27;#&#x27;). There is no artist drawing it. Instead the generator makes a long string of choices: which row to start on, how long a hallway should be, where to branch. Left alone, those choices would be different every run. That is the problem a seed solves.</p></div><div class="prose"><h3>How a seed pins it down</h3><p>Look at the very first step of the generator&#x27;s work: rng = random.Random(seed) (src/student/terrain_generator.py, line 86). That creates a private random-number generator seeded from your integer. Every random call the generator makes — picking a row, a column, a corridor length, a branch point — pulls from this one rng, in a fixed order. Same seed means the same sequence of numbers in the same order, so the map is fully decided by the spec plus the seed, and nothing else. If you didn&#x27;t create this local RNG and instead fell back on the program-wide random module, the seed would do nothing and every run would drift.</p></div><div class="steps-wrap"><h3>What the referee actually demands</h3><ol class="steps"><li>It freezes your request — that spec and seed become a canonical record — before anything runs. From here, ground truth is bytes, not vibes.</li><li>It builds one generator object and asks for request A, then A again, then a different request B, then A a third time. All three A answers must be byte-identical.</li><li>It builds a second, brand-new generator and asks for request A once more. That answer must match too. This is the fresh-instance test.</li><li>If the fresh instance disagrees, it flags NONDETERMINISM with code CONTENT_MISMATCH. If the factory hands back the same object instead of a new one, it flags SHARED_INSTANCE. Both are failures.</li></ol></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>You&#x27;ve probably seen this before: in games like Minecraft, a world seed is a short string, and that seed generates the same landscape for every player, every time. This is the same idea. The spec is the shape of the canvas; the seed is which of the infinite possible maps gets painted on it. Anyone with the same spec and the same seed must see the identical map — including a brand-new copy of the generator. That shared, repeatable map is what lets the referee check your work fairly.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Even the retries are on the seed&#x27;s stream</div><p>An easy place to break determinism is the retry loop. For the branching-tree topology, the generator tries to grow a tree up to max(max_attempts * 4, 8) times. Each failed attempt calls _grow_tree again — but every attempt draws from the SAME seeded rng, so it consumes the next numbers in the same fixed stream. The retries are part of the deterministic sequence. Any code that &#x27;tries again&#x27; must keep pulling from the seeded RNG, never from fresh global randomness, or the replay diverges.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">Myth: remembering the last map is a harmless shortcut</div><p>The classic trap: cache the last generated map on the instance and return it when the same spec and seed come in again. It looks like a speedup and it passes the within-one-object check. It fails the moment the referee builds a SECOND instance: a fresh object has no cache, so it regenerates from scratch — and whether that regenerate matches depends on randomness the seed didn&#x27;t control. Determinism isn&#x27;t &#x27;this object remembers&#x27;; it&#x27;s &#x27;any fresh object, given the same spec and seed, independently arrives at the same map.&#x27; The fix is almost backwards: don&#x27;t store results on the instance at all. Recreate the local random.Random(seed) and recompute every time.</p></div><div class="prose"><h3>Why you should care beyond the grade</h3><p>Determinism isn&#x27;t teaching-assistant trivia. Because the map is a pure function of spec and seed, a bug is reproducible: hand a teammate the exact spec and seed and they watch the same broken map appear. And when the referee re-runs your submission against a canonical record, it can prove the output is genuine and repeatable — that&#x27;s the difference between &#x27;a map was made&#x27; and &#x27;this specific map, made from this specific seed.&#x27;</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>In your own words, what does it mean for terrain generation to be deterministic, and why must it hold across fresh instances rather than just within one object?</p></div><div class="check"><span class="qmark">?</span><p>Where in the student generator is the seed turned into actual randomness, and why does creating the RNG inside the method — rather than once at the class level — matter?</p></div><div class="check"><span class="qmark">?</span><p>The referee runs A/A/B/A. What is each phase checking, and what would make it flag NONDETERMINISM?</p></div><div class="check"><span class="qmark">?</span><p>Why does caching &#x27;the last map&#x27; on the instance break determinism, even though it looks like a clever speedup?</p></div></div></div>
     </section>
 
-    <!-- =============== 10 VERIFICATION =============== -->
     <section id="verification">
-      <h2><span class="num">10</span>How we verified it</h2>
-      <div class="prose">
-        <p>We didn't just write the code and hope. Verification ran through the project's own referee and engine tools:</p>
-      </div>
-      <ul>
-        <li><strong>Referee sessions</strong> — the exact grading functions (<code>run_terrain_session</code>, <code>run_level_session</code>) run against all 18 spec groups: <code>18/18</code> pass, including determinism across A/A/B/A + fresh instances, topology, route, placement, ranges, and inventory.</li>
-        <li><strong>Full engine runs</strong> — the real workbench runtime, not just validators: <strong>142/142</strong> certified worlds COMPLETED across all catalog tiers and all published guide/workbench records, including all 8 patrol worlds.</li>
-        <li><strong>Practice runtime</strong> — the public straight-path exercise: student-generated worlds complete <code>8/8</code>.</li>
-        <li><strong>Canonical trace</strong> — the published enemy level reproduces the expected action sequence exactly (ENGAGE the blocker, then walk through).</li>
-      </ul>
-      <div class="callout warn">
-        <div class="cttl">Honest limits</div>
-        <p>What we did <em>not</em> do: click through the actual graphical workbench, and exhaustively test every possible seed in the public range. Those remain open items — and they're the perfect next steps for you to do live and point to.</p>
-      </div>
+      <h2><span class="num">11</span>How we verified it</h2>
+      <p class="lesson-hero">We proved the engine works by running it 142 times, not by hoping.</p>
+      <div class="prose"><p>When you write code, someone will eventually ask: &quot;Does it actually work?&quot; Saying &quot;I think so&quot; isn&#x27;t enough. This lesson shows how this project was verified the honest way: by running the real grading tool against real worlds and counting the results. By the end you&#x27;ll know what a &quot;referee session&quot; is, what a &quot;certified engine world&quot; means, what a &quot;trace&quot; is, and why a passing test and a human-looking-at-the-screen are different things. You&#x27;ll be able to explain the difference between &quot;the checks pass&quot; and &quot;I&#x27;ve seen it work with my own eyes&quot; — and why this project needs both.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Referee session</div><p class="muted">A referee session is the grading program run on a project to test it — the same checker the course workbench uses when it scores your solution. This project runs two of them: run_terrain_session (checks the map generator) and run_level_session (checks the whole level, including the explorer&#x27;s route).</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Spec group</div><p class="muted">A spec group is one distinct set of rules a level must follow — like &#x27;the path is straight&#x27;, &#x27;there are enemies&#x27;, or &#x27;a patrol moves on a schedule&#x27;. The catalog defines 18 of them, across 9 tiers (0–8) of difficulty.</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Certified engine world</div><p class="muted">A certified engine world is a level that the official engine accepts as valid, built from the published catalog. &#x27;Certified&#x27; means it meets the specification — not just any random map.</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Trace</div><p class="muted">A trace is the exact list of actions an explorer takes, in order — for example: ENGAGE the enemy, then move EAST, EAST, EAST, then SOUTH, SOUTH, then EXIT. Reproducing the canonical trace character-for-character means the explorer made every move the guide says it should.</p></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Determinism</div><p class="muted">Determinism means the same inputs always give the same output. A seeded generator is deterministic: feed it the same seed and you get the same map every time, which is what makes tests reproducible.</p></div></div>
+      <div class="prose"><h3>The short answer</h3><p>The project was verified two ways: automated referee grading and full engine runs. The referee sessions pass 18/18 spec groups. The full engine completed 142/142 certified worlds — including all 8 patrol worlds. Practice runs completed 8/8 straight-path worlds. The canonical enemy trace is reproduced exactly. Two honest caveats remain: the graphical GUI confirmation is still pending, and not every public seed was stress-tested.</p></div><div class="steps-wrap"><h3>Step one: run the grader, not your own test</h3><ol class="steps"><li>Run the referee&#x27;s own grading sessions — run_terrain_session and run_level_session, the exact functions the workbench uses.</li><li>Point them at all 18 real spec groups from the catalog: families and guide levels across tiers 0–8.</li><li>Watch what they check: determinism (same seed, same map), dependency wiring, topology, route, placement, ranges, and inventory.</li></ol></div><div class="steps-wrap"><h3>Step two: run the real engine end-to-end</h3><ol class="steps"><li>Drive the actual run_public engine — the same path the workbench&#x27;s Run solution uses.</li><li>Generate worlds with the student&#x27;s own code: TerrainGenerator → LevelGenerator → AgentController → engine.</li><li>Run the Straight path family across horizontal/vertical, reversed, and seeds 11/29: 8/8 COMPLETED with score 100.</li></ol></div><div class="prose"><h3>Step three: complete every certified world</h3><p>After switching the controller from greedy to pathfinding, the controller completes every certified engine world: all 36 catalog family worlds (tiers 0–8, straight/bent/tree/general, with and without artifacts and enemies, seeds 11/29) plus all 106 published guide and workbench records (98 static + 8 patrol). That is 142/142 COMPLETED.</p></div><div class="prose"><h3>The patrol and enemy fine print</h3><p>On the exact published enemy level, the explorer reproduces the canonical trace character-for-character: ENGAGE enemy-0, then EAST, EAST, EAST, then SOUTH, SOUTH, then EXIT. This confirms it only clears the blocking enemy and leaves off-path enemies alone. Patrol worlds (guide + tier-8 family) complete without collisions or patrol engagement. On the enemy-choice level, it takes the cheaper outer route (cost 9) instead of the direct engage (cost 10).</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Think of verification like inspecting a building before it opens. The referee sessions are the blueprint check: does the design meet every rule on paper? The full engine runs are the walkthrough: a person actually walks every hallway and opens every door. The canonical trace is the fire-drill checklist: the exact order of steps is written down and matched. A blueprint that passes and a building you&#x27;ve walked through are both needed — neither alone is enough.</p></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 misconception</div><p>The biggest wrong idea: &#x27;If the validators pass, it definitely works.&#x27; That&#x27;s not true. The validators pass on the provided terrain, but they never exercised the student&#x27;s own generators live. The real end-to-end loop — student generates, student explores — was only confirmed later, by running the engine on student-generated worlds. Passing a check and seeing it work for real are different things. So is &#x27;the tests passed&#x27; and &#x27;I confirmed it in the GUI.&#x27; The GUI confirmation is still pending.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Honest caveats</div><p>Two things are not yet fully verified. First, the graphical GUI confirmation is still pending: every saved run so far used provided terrain, so the student generators have never been exercised in the actual workbench GUI. Second, the full public seed range is wider than the seeds tested (11 and 29) — not every public seed was stress-tested. Both are flagged as TODO, not hidden.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>What is the difference between the referee sessions and the full engine runs?</p></div><div class="check"><span class="qmark">?</span><p>Why is the canonical trace useful evidence that the explorer behaves correctly?</p></div><div class="check"><span class="qmark">?</span><p>The validators pass — why is that not enough to say the project is verified?</p></div><div class="check"><span class="qmark">?</span><p>What is still unconfirmed, and why does that matter for a final verdict?</p></div></div></div>
     </section>
 
-    <!-- =============== 11 DEFEND =============== -->
     <section id="defend">
-      <h2><span class="num">11</span>Defend your project</h2>
-      <div class="prose">
-        <p>A reviewer doesn't need you to recite code — they need you to show you <em>understand the decisions</em>. Here are the questions most likely to come up, with answers you can give in your own words.</p>
-      </div>
-
-      <details open><summary>Why isn't the controller just always moving toward the exit?</summary>
-        <div class="body">Because "toward the exit" ignores walls, occupied cells, and moving patrols. The only robust way is to plan a real route over the floor — a shortest-path or lowest-cost search from the current position to the exit. Moving greedily works on a straight corridor and fails almost everywhere else.</div></details>
-
-      <details><summary>What bug did you catch in the first version?</summary>
-        <div class="body">The greedy controller could WAIT-lock: if the very first step away from the exit was a wall, it had no valid move, so it waited forever. The fix was to plan routes with graph search instead of moving straight at the exit.</div></details>
-
-      <details><summary>What's the difference between a static enemy and a patrol — and do you kill either?</summary>
-        <div class="body">A static enemy sits still and is cleared with ENGAGE, which removes it and charges its penalty; you don't move. A patrol follows a repeating schedule and advances once per accepted action; it cannot be engaged. Neither is "killing" — there's no combat, health, or attack. ENGAGE is just clearing a blocker and paying its cost. Patrols have to be timed around.</div></details>
-
-      <details><summary>How do you know every level is solvable?</summary>
-        <div class="body">Two layers: the generators obey growth rules that keep terrain connected (and acyclic for trees), and the level designer places start/exit and entities legally — never blocking the start or exit by default. Then the referee's own validation chain checks connectivity, route length, placement, ranges, and inventory. Every generated world passed every check.</div></details>
-
-      <details><summary>Why does determinism matter so much here?</summary>
-        <div class="body">Grading must be fair and reproducible. Because everything is driven by a seeded random number generator, the same seed rebuilds the same world, and the referee can re-run any student's code against canonical transcripts. It also makes debugging trivial: a bad map is exactly reproducible.</div></details>
-
-      <details><summary>Why not collect every artifact you see?</summary>
-        <div class="body">Collecting is usually good, but it costs an accepted action — which advances the clock and, in patrol worlds, moves the guards. Sometimes a reward is a trap: grabbing it costs more in time or risk than it's worth. The controller weighs cost, so it collects when safe.</div></details>
-
-      <details><summary>What did you actually intend to learn from this?</summary>
-        <div class="body">Deterministic procedural generation, graph search/pathfinding, decision loops over a state snapshot, constraint design (what makes a level legal and fair), and how to verify against a specification rather than just "make it run." Those transfer directly to game dev, robotics-style planning, and adjacent work.</div></details>
-
-      <details><summary>What would you improve next?</summary>
-        <div class="body">I'd make the controller reason about score more aggressively — e.g., plan collections as part of the cost search rather than as opportunistic bonuses — and I'd run the full public seed range and the graphical workbench to close the remaining verification gaps.</div></details>
+      <h2><span class="num">12</span>Defend your project</h2>
+      <p class="lesson-hero">When the reviewer asks &quot;why&quot;, you need answers that come from your code, not guesses.</p>
+      <div class="prose"><p>A reviewer will probe your project. They will not ask &quot;does it work&quot; and stop. They will ask why you built it the way you did, and what happens in the tricky cases. This section gives you honest, accurate answers to the questions you are most likely to get. By the end, you will be able to explain what your controller actually does, why it plans a route instead of walking straight at the exit, and where you would go next. Every answer below is grounded in the real code in controller.py and the verified progress log, so you can defend it without bluffing.</p></div>
+      <div class="concept-grid"><div class="card concept"><div class="kicker">Concept</div><div class="gterm">static enemy</div><p class="muted">An enemy that never moves. In your code, it is a clearable blocker: you ENGAGE it to clear the way, paying one action plus its encounter penalty, and then you walk through its cell.</p><details><summary>Deeper</summary><div class="body">In controller.py, a static enemy is any enemy that does not own a patrol. Defeated ones are ignored.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">patrol</div><p class="muted">An enemy that moves on a fixed, repeating schedule. It advances one step per accepted action, so its future position is predictable.</p><details><summary>Deeper</summary><div class="body">You never engage a patrol. You predict where it will be next and time your movement to avoid it.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">Dijkstra (pathfinding)</div><p class="muted">A search that explores every possible sequence of moves and keeps the cheapest one to the exit, treating each action and enemy encounter as a cost.</p><details><summary>Deeper</summary><div class="body">Your controller searches over (position, turn, defeated) states, so it plans against future patrol positions, not just the current snapshot.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">determinism</div><p class="muted">The property that the same input always produces the same output. Your terrain generator is seeded, so a given seed always makes the same map.</p><details><summary>Deeper</summary><div class="body">Because it is deterministic, your results are reproducible, and you can match a canonical trace exactly.</div></details></div><div class="card concept"><div class="kicker">Concept</div><div class="gterm">deadline / max_turns</div><p class="muted">The cap on how many actions you may take. If the turn counter reaches it before the exit, the run fails.</p><details><summary>Deeper</summary><div class="body">The planner stops exploring once reaching the limit would overshoot, so it only plans routes that fit.</div></details></div></div>
+      <div class="prose"><h3>Why not just move toward the exit?</h3><p>Walking straight at the exit sounds simple, but it fails in this world. The older greedy version of your controller did exactly that, and it could get stuck: on any map where the first step away from your starting cell is not toward the exit, it would just WAIT forever. The map can have walls, enemies blocking the path, and patrols moving into your way. So you replaced guessing with planning. The controller searches the whole reachable space, finds the lowest-cost route to the exit, and takes the first step of that route. This is why it completes 142 of 142 certified worlds instead of locking up.</p></div><div class="list-wrap"><h3>What bug did you fix?</h3><ul class="tick"><li>The controller used to send MOVE_NORTH when it meant to move south, so it walked the wrong way on vertical and reversed paths. It is now coordinate-aware and uses (row, column) offsets.</li><li>The greedy walker could WAIT-lock on maps where the first correct move was away from the exit. Switching to planned pathfinding fixed that.</li><li>artifact.py used to clamp negative artifact values to 0, hiding bad data. It now rejects negative values outright. Same for enemy penalties, which used to be accepted as negative.</li></ul></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Think of static enemies as doors and patrols as moving guards. You do not kill either one. A static enemy is a door you pay to open: you ENGAGE it, which costs one action plus its encounter penalty, and then the cell is clear to walk through. A patrol is a guard you never fight. You read its fixed schedule, predict where it will be after your next action, and time your move (or WAIT) so you never share a cell with it. Your code never engages a patrol, and it only engages a static enemy when that enemy actually blocks your route, leaving off-path enemies alone.</p></div><div class="prose"><h3>How do you know every level is solvable?</h3><p>Short answer: you don&#x27;t assume it, you search it. The controller treats the whole task as a complete search over every reachable (position, turn, defeated) state. If a valid route to the exit exists, this search finds it; if no route exists, the planner returns None and the controller spends the run safely. That is how the controller could be verified: it completed all 36 catalog family worlds and all 106 published guide and workbench records, 142 of 142, and it reproduces the canonical published enemy-level trace character for character.</p></div><div class="callout"><div class="sym">!</div><div class="cttl">Why does determinism matter?</div><p>Determinism means the same seed always produces the same map and the same run. That matters for two reasons. First, when you are debugging, a failure can be reproduced and fixed instead of being a random one-off. Second, it is what lets you verify a result exactly, like reproducing the canonical eight-step trace. Your terrain generator is seeded with random.Random(seed), so fresh instances are deterministic. One honest caveat from the log: the full public seed range is wider than the seeds you tested, so a final live confirmation in the actual workbench GUI is still the last step.</p></div><div class="callout analogy"><div class="sym">≈</div><div class="cttl">Analogy</div><p>Collecting an artifact costs an action, and every action advances the patrol clock one step. Think of time as a limited resource and patrols as hazards that move with it. If you took a long detour to grab every artifact, you would spend turns that the patrols use to move into your path, and you could run out of turns before reaching the exit. So the controller collects only artifacts that sit on the tile it is already passing through, and only when no patrol is about to arrive on that cell after the collection. It harvests opportunistically, never detours.</p></div><div class="steps-wrap"><h3>What did you intend to learn, and what would you improve next?</h3><ol class="steps"><li>The core lesson was planning under constraints: a greedy policy fails, but a complete lowest-cost search over states succeeds reliably.</li><li>The second lesson was reading a moving system: predicting patrol phases from the turn clock turns a dangerous patrol into a solvable timing problem.</li><li>Next, exercise more of the public seed range and run the final confirmation in the actual workbench GUI, since every saved run so far used provided terrain.</li><li>After that, consider handling edge cases the search does not weigh, such as optimizing artifact value against travel cost, instead of only collecting whatever is on the way.</li></ol></div><div class="callout danger"><div class="sym">✕</div><div class="cttl">The #1 misconception</div><p>The biggest wrong idea is that &quot;winning&quot; means destroying or defeating every enemy. It doesn&#x27;t. There is no combat or kill mechanic in this project at all. You pay a penalty to clear a blocking static enemy, and you never touch a patrol; the whole game is about reaching the exit within the turn limit at the lowest cost. If you claim you &#x27;kill enemies&#x27;, a reviewer who read the code will catch it. Say exactly what you do: ENGAGE blockers, time patrols, and exit.</p></div>
+      <div class="checklist"><div class="kicker">Self-check</div><h3>Say it in your own words</h3><div class="checks"><div class="check"><span class="qmark">?</span><p>Why does the controller search a full plan instead of just moving toward the exit?</p></div><div class="check"><span class="qmark">?</span><p>What is the difference between a static enemy and a patrol, and what do you do to each?</p></div><div class="check"><span class="qmark">?</span><p>How does the controller know whether a level is solvable?</p></div><div class="check"><span class="qmark">?</span><p>Why is determinism useful, and what is the one thing still left to confirm live?</p></div></div></div>
     </section>
 
-    <!-- =============== 12 READ THE CODE =============== -->
     <section id="code">
       <h2><span class="num">12</span>Read the code</h2>
       <div class="prose">
@@ -1210,7 +1291,173 @@ class AgentController:
       </div>
     </section>
 
-    <!-- =============== PLAYGROUND =============== -->
+    
+
+    <section id="deepdive">
+      <h2><span class="num">13</span>Deep dive</h2>
+      <div class="prose">
+        <p>The concept sections give you the map. This is the territory: five worked-through looks at exactly what happens inside a run, how the planner really searches, how patrol timing works with real numbers, how a score is actually computed, and what the referee checks. These are the "show your work" details that make a defense convincing.</p>
+      </div>
+
+      <!-- A: run anatomy -->
+      <div class="card" id="dd-run">
+        <div class="kicker">Deep dive A · one run, turn by turn</div>
+        <h3>Anatomy of a run</h3>
+        <p class="muted">A simplified example on a single corridor: <code>..... </code>, start at <code>(0,0)</code>, exit at <code>(0,4)</code>, one static enemy at <code>(0,2)</code> with penalty 6. Watch how the snapshot on each turn drives the one action returned.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Turn</th><th>Agent tile</th><th>What the snapshot shows</th><th>Action returned</th><th>Why</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>(0,0)</td><td>Exit ahead; enemy at (0,2)</td><td><code>MOVE_EAST</code></td><td>Enemy not adjacent yet — step toward it.</td></tr>
+            <tr><td>2</td><td>(0,1)</td><td>Enemy is now adjacent at (0,2)</td><td><code>ENGAGE</code> enemy-0</td><td>Clear the blocker. Pay penalty 6. Stay put (accepted action).</td></tr>
+            <tr><td>3</td><td>(0,1)</td><td>Enemy defeated; tile free</td><td><code>MOVE_EAST</code></td><td>Step onto the cleared tile.</td></tr>
+            <tr><td>4</td><td>(0,2)</td><td>Clear path</td><td><code>MOVE_EAST</code></td><td>Continue toward exit.</td></tr>
+            <tr><td>5</td><td>(0,3)</td><td>Clear path</td><td><code>MOVE_EAST</code></td><td>Continue.</td></tr>
+            <tr><td>6</td><td>(0,4)</td><td>Standing on exit</td><td><code>EXIT</code></td><td>Arrival alone isn't enough — leave.</td></tr>
+          </tbody>
+        </table></div>
+        <p class="code-note"><b>Cost accounting:</b> T=6 actions (five moves + EXIT… and the ENGAGE, so six total), P=6 (the penalty). Total C = 12. Later in <a href="#dd-scoring">scoring math</a> we turn that into a score.</p>
+        <div class="callout">
+          <div class="cttl">Tie-back to the code</div>
+          <p>This exact order is the <code>choose_action</code> logic: EXIT first (line ~117), then COLLECT, then the plan. And note the ENGAGE only happened <em>when adjacent</em> — the planner never enters an enemy's tile, it ENGAGEs first. That's the <code>_plan</code> transition in the controller.</p>
+        </div>
+      </div>
+
+      <!-- B: planner -->
+      <div class="card" id="dd-planner">
+        <div class="kicker">Deep dive B · the algorithm</div>
+        <h3>Why the planner searches</h3>
+        <p class="muted">The controller never "walks toward the exit." Instead it runs a lowest-cost search over states and follows the cheapest route. Here's the classic decision, with the two candidate routes on the same map.</p>
+        <div class="dd-grid">
+          <div class="dd-panel">
+            <svg viewBox="0 0 252 210" role="img" aria-label="Two candidate routes: direct through enemy vs detour around" style="width:100%;height:auto">
+              <rect x="0" y="0" width="252" height="210" rx="14" fill="var(--bg2)"></rect>
+
+              <!-- grid cells -->
+              <g stroke="var(--line)" stroke-width="1.5">
+                <rect x="14"  y="16"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="60"  y="16"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="106" y="16"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="152" y="16"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="14"  y="62"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="60"  y="62"  width="44" height="44" rx="9" fill="color-mix(in srgb, var(--line) 62%, var(--bg))"></rect>
+                <rect x="106" y="62"  width="44" height="44" rx="9" fill="color-mix(in srgb, var(--line) 62%, var(--bg))"></rect>
+                <rect x="152" y="62"  width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="14"  y="108" width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="60"  y="108" width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="106" y="108" width="44" height="44" rx="9" fill="var(--card)"></rect>
+                <rect x="152" y="108" width="44" height="44" rx="9" fill="var(--card)"></rect>
+              </g>
+
+              <!-- paths: direct (red dashed) vs detour (green solid) -->
+              <g fill="none" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="36,38 82,38 128,38 174,38 174,84 174,130"
+                  stroke="var(--red)" stroke-dasharray="7 5"></polyline>
+                <polyline points="36,38 36,84 36,130 82,130 128,130 174,130"
+                  stroke="var(--accent)"></polyline>
+              </g>
+
+              <!-- start / exit / enemy markers -->
+              <g font-family="JetBrains Mono, monospace" font-weight="700" text-anchor="middle" dominant-baseline="central">
+                <circle cx="36" cy="38" r="13" fill="var(--accent)"></circle>
+                <text x="36" y="39" font-size="13" fill="#fff">S</text>
+                <circle cx="174" cy="130" r="13" fill="var(--blue)"></circle>
+                <text x="174" y="131" font-size="13" fill="#fff">X</text>
+                <circle cx="82" cy="38" r="13" fill="var(--red)"></circle>
+                <text x="82" y="39" font-size="13" fill="#fff">E</text>
+              </g>
+
+              <!-- cost labels -->
+              <g font-family="JetBrains Mono, monospace" font-size="11" font-weight="700" text-anchor="middle">
+                <text x="140" y="46" fill="var(--red)">C=13</text>
+                <text x="40" y="158" fill="var(--accent)">C=6</text>
+                <text x="126" y="196" font-size="10.5" fill="var(--fg2)" font-weight="500">direct vs detour</text>
+              </g>
+            </svg>
+          </div>
+          <div class="dd-panel">
+            <h3>The tradeoff</h3>
+            <p class="muted"><b>Direct route (red):</b> engage the enemy, then walk through. Cost = 1 action for ENGAGE + 5 moves + 1 EXIT = 7 actions, plus penalty 6 ⇒ <b>C = 13</b>.</p>
+            <p class="muted"><b>Detour (green):</b> loop around the wall. Cost = 5 moves + 1 EXIT = 6 actions, no penalty ⇒ <b>C = 6</b>.</p>
+            <p class="muted">The planner picks green — more tiles, <em>less cost</em>. That's the whole reason it optimizes <code>C = T + P</code>, not distance.</p>
+            <div class="formula">cost = actions + penalties</div>
+            <p class="muted" style="font-size:13.5px">Legend: <b style="color:var(--red)">red</b> dashed = direct, <b style="color:var(--accent)">green</b> solid = detour. <b>E</b> = enemy.</p>
+          </div>
+        </div>
+        <div class="callout warn">
+          <div class="cttl">Why not just greedy?</div>
+          <p>A greedy "move toward the exit" controller would head straight into the wall or the enemy. On a map where the first step away from the exit is a wall, it has no legal move and — because WAIT is allowed — it sits forever. That's the WAIT-lock. Searching fixes it.</p>
+        </div>
+      </div>
+
+      <!-- C: patrol timing -->
+      <div class="card" id="dd-patrol">
+        <div class="kicker">Deep dive C · moving guards</div>
+        <h3>Patrol timing, in numbers</h3>
+        <p class="muted">A patrol has a <em>positions</em> loop and an <em>initial_phase</em>. Each turn, its cell is <code>positions[(initial_phase + turn) % len(positions)]</code>. Try changing the initial phase below and watch the same loop shift.</p>
+        <div class="dd-panel">
+          <div class="pg-controls">
+            <label>Initial phase
+              <input type="number" id="patPhase" value="1" min="0" max="3">
+            </label>
+          </div>
+          <div class="timeline" id="patTimeline"></div>
+          <p class="code-note" style="margin-top:8px">Positions used here: <code>(0,2), (0,3), (1,3), (1,2)</code>, so period = 4. The highlighted cells show where the patrol is on each turn. <b>A move into a highlighted cell on that same turn — or into the cell it's about to occupy next — collides.</b></p>
+        </div>
+        <div class="callout">
+          <div class="cttl">The collision rule, restated</div>
+          <p>Patrols advance <em>once per accepted action</em>. So after you move, the clock ticks and the patrol advances. Your destination must be clear <em>now</em> <b>and</b> clear <em>right after the tick</em> — the controller checks both (<code>patrol_now</code> and <code>patrol_next</code>).</p>
+        </div>
+      </div>
+
+      <!-- D: scoring -->
+      <div class="card" id="dd-scoring">
+        <div class="kicker">Deep dive D · the math</div>
+        <h3>Scoring, worked example</h3>
+        <p class="muted">Take the enemy corridor from Deep dive A, and compare it to the detour story from Deep dive B. Same level, two controllers, two scores.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Metric</th><th>Direct (engage)</th><th>Detour (avoid)</th></tr></thead>
+          <tbody>
+            <tr><td>T — actions</td><td>7</td><td>6</td></tr>
+            <tr><td>P — penalties</td><td>6</td><td>0</td></tr>
+            <tr><td>C = T + P</td><td><b>13</b></td><td><b>6</b></td></tr>
+            <tr><td>L — reference cost</td><td>5</td><td>5</td></tr>
+            <tr><td>E = max(0, C − L)</td><td>8</td><td>1</td></tr>
+          </tbody>
+        </table></div>
+        <div class="formula">score = B − r × E&nbsp;&nbsp;(0 if incomplete, or if E ≥ Q)</div>
+        <p class="muted">With <code>B=100</code>, <code>r=5</code>, <code>Q=40</code>:</p>
+        <ul>
+          <li><b>Direct:</b> 100 − 5×8 = <b>60</b></li>
+          <li><b>Detour:</b> 100 − 5×1 = <b>95</b></li>
+        </ul>
+        <p class="muted">Same level, +35 points, purely from routing. This is exactly what a reviewer wants to hear you reason about.</p>
+      </div>
+
+      <!-- E: referee -->
+      <div class="card" id="dd-referee">
+        <div class="kicker">Deep dive E · the grader</div>
+        <h3>Inside the referee</h3>
+        <p class="muted">The referee isn't one check — it's a chain. Each group asserts something specific, and any one failing fails the whole session.</p>
+        <div class="tablewrap"><table>
+          <thead><tr><th>Validator group</th><th>What it asserts</th></tr></thead>
+          <tbody>
+            <tr><td>Spec</td><td>The spec is well-formed: ranges sane, topology valid, ids valid.</td></tr>
+            <tr><td>Request</td><td>Terrain request → generation respects the spec contract.</td></tr>
+            <tr><td>Terrain</td><td>Correct rows/columns, open-tile bounds, topology shape, <em>connectedness</em>.</td></tr>
+            <tr><td>Level</td><td>Endpoints on traversable tiles, entities legal, no illegal overlaps/endpoints, values in range.</td></tr>
+            <tr><td>Determinism</td><td>Same spec + seed on fresh instances produce byte-identical results (A/A, B/A).</td></tr>
+            <tr><td>Inventory</td><td>The controller's actions follow rules: valid target ids, no illegal collections/engages.</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout">
+          <div class="cttl">Why this matters to you</div>
+          <p>Every one of these groups is a place a bad generator or controller <em>would</em> fail. When you say "142/142 engine worlds pass," this is the chain that certified them. Be able to name a few of these groups out loud.</p>
+        </div>
+      </div>
+    </section>
+
+    
+
     <section id="playground">
       <h2><span class="num">◇</span>Terrain playground</h2>
       <div class="prose">
@@ -1248,7 +1495,8 @@ class AgentController:
       </div>
     </section>
 
-    <!-- =============== QUIZ =============== -->
+    
+
     <section id="quiz">
       <h2><span class="num">◇</span>Self-check quiz</h2>
       <p>Pick an answer, then reveal the explanation. These are the exact concepts you're most likely to be asked about.</p>
@@ -1293,7 +1541,8 @@ class AgentController:
       </div>
     </section>
 
-    <!-- =============== GLOSSARY =============== -->
+    
+
     <section id="glossary">
       <h2><span class="num">◇</span>Glossary</h2>
       <div class="gloss">
@@ -1315,9 +1564,13 @@ class AgentController:
       </div>
     </section>
 
+    
+
     <footer>
       <p>Built as a study companion for the Adventure Workbench student project. The ideas here are the concepts behind the code — not the code itself. Use it to talk your way through a review with confidence.</p>
     </footer>
+
+    
 
     <div class="pager" id="pager" aria-label="Section navigation"></div>
 
@@ -1365,7 +1618,7 @@ class AgentController:
       if(en.isIntersecting){
         var id = en.target.id;
         links.forEach(function(l){
-          l.classList.toggle("active", l.getAttribute("href") === "#" + id);
+          l.classList.toggle("is-active", l.getAttribute("href") === "#" + id);
         });
       }
     });
@@ -1422,12 +1675,10 @@ class AgentController:
           return s;
         }
       }
-      // fallback straight
       var row2 = randInt(rng,0,rows-1), c1 = randInt(rng,0,cols-target);
       var set2 = new Set(); for(var c2=c1; c2<c1+target; c2++) set2.add(row2+","+c2);
       return set2;
     }
-    // tree / general growth
     var sr = randInt(rng,0,rows-1), sc = randInt(rng,0,cols-1);
     var opened = new Set([sr+","+sc]);
     var frontier = neighbors(sr,sc).filter(function(n){ return n[0]>=0&&n[0]<rows&&n[1]>=0&&n[1]<cols; });
@@ -1473,7 +1724,6 @@ class AgentController:
     var exitC = getComputedStyle(document.documentElement).getPropertyValue("--blue").trim();
 
     ctx.fillStyle = bg; ctx.fillRect(0,0,canvas.width,canvas.height);
-    // grid + tiles
     for(var r=0;r<rows;r++){
       for(var c=0;c<cols;c++){
         var x = pad + c*cw, y = pad + r*ch;
@@ -1483,7 +1733,6 @@ class AgentController:
         ctx.strokeRect(x+1,y+1,cw-2,ch-2); ctx.globalAlpha = 1;
       }
     }
-    // start = top-left open, exit = a leaf (degree-1) if possible else far tile
     var opens = Array.from(set).map(function(k){ return k.split(",").map(Number); });
     opens.sort(function(a,b){ return (a[0]-b[0])||(a[1]-b[1]); });
     var start = opens[0];
@@ -1493,23 +1742,19 @@ class AgentController:
       if(d === 1){ var dist = Math.abs(o[0]-start[0])+Math.abs(o[1]-start[1]); if(dist>best){ best=dist; exit=o; } }
     });
     if(!exit) exit = opens[opens.length-1];
-    // mark
     var sx = pad + start[1]*cw + cw/2, sy = pad + start[0]*ch + ch/2;
     ctx.fillStyle = startC; ctx.beginPath(); ctx.arc(sx,sy,cw*0.28,0,Math.PI*2); ctx.fill();
     var ex = pad + exit[1]*cw + cw/2, ey = pad + exit[0]*ch + ch/2;
     ctx.fillStyle = exitC; ctx.beginPath(); ctx.arc(ex,ey,cw*0.28,0,Math.PI*2); ctx.fill();
 
-    // stats
     var degree3 = 0;
     opens.forEach(function(o){
       var d = neighbors(o[0],o[1]).filter(function(n){ return set.has(n[0]+","+n[1]); }).length;
       if(d >= 3) degree3++;
     });
-    var connected = true;
-    // BFS check
     var seen = new Set(), queue=[start[0]+","+start[1]]; seen.add(queue[0]);
     while(queue.length){ var cur=queue.shift(); neighbors(+cur.split(",")[0],+cur.split(",")[1]).forEach(function(n){ var k=n[0]+","+n[1]; if(set.has(k)&&!seen.has(k)){ seen.add(k); queue.push(k); } }); }
-    connected = seen.size === set.size;
+    var connected = seen.size === set.size;
 
     statsEl.innerHTML =
       "<div class='big'>" + topo + "</div>" +
@@ -1555,14 +1800,7 @@ class AgentController:
   });
 
   /* ---------- prev/next pager ---------- */
-  var SECTIONS = [
-    ["#overview","Overview"],["#world","World model"],["#entities","Entities"],
-    ["#terrain","Terrain"],["#level","Levels"],["#controller","Controller"],
-    ["#enemies","Enemies & patrols"],["#scoring","Scoring"],["#determinism","Determinism"],
-    ["#verification","Verification"],["#defend","Defend"],["#code","Read the code"],
-    ["#deepdive","Deep dive"],
-    ["#playground","Playground"],["#quiz","Quiz"],["#glossary","Glossary"]
-  ];
+  var SECTIONS = [["#overview", "Overview"], ["#world", "World model"], ["#entities", "Entities"], ["#terrain", "Terrain"], ["#level", "Levels"], ["#controller", "Controller"], ["#planning", "Planning"], ["#enemies", "Enemies & patrols"], ["#scoring", "Scoring"], ["#determinism", "Determinism"], ["#verification", "Verification"], ["#defend", "Defend"], ["#code", "Read the code"], ["#deepdive", "Deep dive"], ["#playground", "Playground"], ["#quiz", "Quiz"], ["#glossary", "Glossary"]];
   var pager = document.getElementById("pager");
   function buildPager(){
     var cur = -1, hash = location.hash;
@@ -1616,6 +1854,7 @@ class AgentController:
   patInput.addEventListener("input", renderPatrol);
   renderPatrol();
 })();
+
 </script>
 </body>
 </html>
