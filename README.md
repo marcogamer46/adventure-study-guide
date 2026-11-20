@@ -14,6 +14,9 @@ GitHub Pages.
 - **11 concept sections** — from "what you built" through "defend your project"
 - **Read the code** — all six `src/student/` modules, syntax-highlighted with
   line numbers and plain-language notes
+- **Deep dive** — run anatomy (turn-by-turn trace), a visual of why the planner
+  searches, an interactive patrol-timing timeline, a worked scoring example, and
+  what the referee actually checks
 - **Interactive terrain playground** — generate maps by topology + seed, watch
   determinism in action
 - **Self-check quiz** with explanations
