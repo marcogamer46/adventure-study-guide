@@ -565,7 +565,8 @@ const WM = {
   bootDone:false,
 
   boot(){
-    const boot=D("boot"), log=D("bootlog"), bar=D("bootbar").firstElementChild;
+    const boot=D("boot"), log=D("bootlog");
+    const bar = (D("bootbar")&&D("bootbar").firstElementChild) || null;
     if(!boot) return;
     const lines=[
       "ADVENTURE/OS v2.1 — boot sequence",
@@ -580,30 +581,36 @@ const WM = {
       "  desktop compositor ............................ ready",
       "  session started ............................... explorer@adventure"
     ];
-    let li=0, ch=0, cur="";
-    const type=()=>{
-      if(li>=lines.length){
-        bar.style.width="100%";
-        setTimeout(()=> finishBoot(), 340);
-        return;
-      }
-      const L=lines[li];
-      if(ch===0){ cur=""; log.innerHTML+='<div class="line">'; }
-      cur+=L[ch];
-      log.lastElementChild.textContent=cur;
-      ch++;
-      bar.style.width = Math.min(100, Math.round(((li + ch/L.length)/lines.length)*100))+"%";
-      if(ch<L.length){ setTimeout(type, 14); }
-      else { log.lastElementChild.className="line ok"; li++; ch=0; setTimeout(type, 90); }
-    };
-    setTimeout(type, 260);
-    const skip=D("bootskip");
-    if(skip) skip.onclick = ()=>{ log.innerHTML=""; li=lines.length; };
-    function finishBoot(){
+    let finished=false;
+    const done=()=>{
+      if(finished) return;
+      finished=true;
+      if(bar) bar.style.width="100%";
       boot.classList.add("done");
       WM.bootDone=true;
-      setTimeout(()=>{ boot.remove(); }, 700);
-    }
+      setTimeout(()=>{ if(boot.parentNode) boot.parentNode.removeChild(boot); },700);
+    };
+    // hard fallback: the boot can never leave the user stuck
+    setTimeout(done, 6500);
+    let li=0, ch=0, lineEl=null;
+    const step=()=>{
+      if(finished) return;
+      if(li>=lines.length){ done(); return; }
+      const L=lines[li];
+      if(ch===0){
+        lineEl=document.createElement("div");
+        lineEl.className="line";
+        if(log) log.appendChild(lineEl);
+      }
+      if(lineEl) lineEl.textContent = L.slice(0,ch+1);
+      ch++;
+      if(bar) bar.style.width = Math.min(100, Math.round(((li+ch/L.length)/lines.length)*100))+"%";
+      if(ch<L.length){ setTimeout(step, 9); }
+      else { if(lineEl) lineEl.className="line ok"; li++; ch=0; setTimeout(step, 80); }
+    };
+    setTimeout(step, 200);
+    const skip=D("bootskip");
+    if(skip) skip.onclick = function(){ done(); };
   },
 
   register(name, def){ APP[name]=def; },
@@ -738,7 +745,7 @@ const WM = {
   bounds(){ return {w:window.innerWidth, h:window.innerHeight-56}; }
 };
 
-window.MM = WM;
+window.WM = WM;
 window.TERRAIN = TERRAIN;
 window.mulberry32 = mulberry32;
 window.__fmt = fmt;
@@ -750,7 +757,7 @@ window.__winCount = ()=>_winCount;
    ========================================================================== */
 (function(){
 "use strict";
-const WM = window.MM, D=(id)=>document.getElementById(id), fmt=window.__fmt;
+const WM = window.WM, D=(id)=>document.getElementById(id), fmt=window.__fmt;
 const DATA = window.DATA || {lessons:[],modules:{},quiz:[],glossary:[]};
 
 /* ==========================================================================
@@ -1280,10 +1287,15 @@ window.codeBlock = codeBlock;
 </script>
   <script>(function(){
     var WM=window.WM, APP_LIST=window.APP_LIST, D=function(id){return document.getElementById(id);};
-    /* contours */
-    (function(){
+    /* 0. BOOT FIRST, isolated — a cosmetic failure must never block it */
+    function safe(fn){ try{ fn(); }catch(e){} }
+    safe(function(){ WM.boot(); });
+
+    /* 1. contours */
+    safe(function(){
       var svg=D("contours"), NS="http://www.w3.org/2000/svg";
       var W=window.innerWidth, H=window.innerHeight;
+      if(!svg) return;
       svg.setAttribute("viewBox","0 0 "+W+" "+H);
       var cx=W*0.72, cy=H*0.30;
       for(var i=0;i<9;i++){
@@ -1300,19 +1312,25 @@ window.codeBlock = codeBlock;
         var p=document.createElementNS(NS,"path");
         p.setAttribute("d",d); svg.appendChild(p);
       }
-    })();
-    /* desktop icons */
-    APP_LIST.forEach(function(app){
-      var b=document.createElement("button");
-      b.className="dicon";
-      b.innerHTML='<span class="ico">'+WM.icon(app.icon,26)+'</span><span>'+app.name+'</span>';
-      b.onclick=function(){ WM.openApp(app.id); };
-      D("icons").appendChild(b);
     });
-    /* start menu */
+
+    /* 2. desktop icons */
+    safe(function(){
+      var icons=D("icons"); if(!icons) return;
+      APP_LIST.forEach(function(app){
+        var b=document.createElement("button");
+        b.className="dicon";
+        b.innerHTML='<span class="ico">'+WM.icon(app.icon,26)+'</span><span>'+app.name+'</span>';
+        b.onclick=function(){ WM.openApp(app.id); };
+        icons.appendChild(b);
+      });
+    });
+
+    /* 3. start menu */
     var menu=D("startmenu"), startBtn=D("startbtn");
-    function closeMenu(){ menu.classList.remove("open"); }
-    (function buildMenu(){
+    function closeMenu(){ if(menu) menu.classList.remove("open"); }
+    safe(function(){
+      if(!menu) return;
       menu.innerHTML='<h4>Adventure /OS</h4>';
       APP_LIST.forEach(function(app){
         var b=document.createElement("button");
@@ -1326,37 +1344,36 @@ window.codeBlock = codeBlock;
       theme.innerHTML='<span class="ico">'+WM.icon("adv",17)+'</span><div>Toggle theme<small>dark / light</small></div>';
       theme.onclick=function(){ closeMenu(); toggleTheme(); };
       menu.appendChild(theme);
-    })();
-    startBtn.onclick=function(e){ e.stopPropagation(); menu.classList.toggle("open"); };
-    document.addEventListener("pointerdown",function(e){ if(!menu.contains(e.target)) closeMenu(); });
+    });
+    if(startBtn) startBtn.onclick=function(e){ e.stopPropagation(); menu.classList.toggle("open"); };
+    document.addEventListener("pointerdown",function(e){ if(menu && !menu.contains(e.target)) closeMenu(); });
     document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeMenu(); });
-    /* theme */
+
+    /* 4. theme */
     function toggleTheme(){
       var cur=document.documentElement.dataset.theme||"dark";
       var next=cur==="dark"?"light":"dark";
       document.documentElement.dataset.theme=next;
       try{ localStorage.setItem("advos-theme",next); }catch(e){}
     }
-    try{ var saved=localStorage.getItem("advos-theme"); if(saved) document.documentElement.dataset.theme=saved; }catch(e){}
-    D("themetray").onclick=toggleTheme;
-    /* clock */
-    function tick(){
-      var n=new Date();
-      var hh=("0"+n.getHours()).slice(-2), mm=("0"+n.getMinutes()).slice(-2);
-      var dv=n.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
-      D("clkhh").textContent=hh+":"+mm; D("clkdate").textContent=dv;
-      var wc=D("wchh"), wd=D("wcdate");
-      if(wc) wc.textContent=hh+":"+mm;
-      if(wd) wd.textContent=dv;
-    }
-    setInterval(tick,15000); tick();
-    /* contours follow resize */
-    var csvg=D("contours");
-    window.addEventListener("resize", function(){
-      csvg.setAttribute("viewBox","0 0 "+window.innerWidth+" "+window.innerHeight);
+    safe(function(){
+      var saved=null; try{ saved=localStorage.getItem("advos-theme"); }catch(e){}
+      if(saved) document.documentElement.dataset.theme=saved;
     });
-    /* go */
-    try{ WM.boot(); }catch(e){ var b=D("boot"); if(b) b.remove(); }
+    var tt=D("themetray"); if(tt) tt.onclick=toggleTheme;
+
+    /* 5. clock */
+    safe(function(){
+      function tick(){
+        var n=new Date();
+        var hh=("0"+n.getHours()).slice(-2), mm=("0"+n.getMinutes()).slice(-2);
+        var dv=n.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+        var c1=D("clkhh"),c2=D("clkdate"),w1=D("wchh"),w2=D("wcdate");
+        if(c1) c1.textContent=hh+":"+mm; if(c2) c2.textContent=dv;
+        if(w1) w1.textContent=hh+":"+mm; if(w2) w2.textContent=dv;
+      }
+      setInterval(tick,15000); tick();
+    });
   })();</script>
 </body>
 </html>
